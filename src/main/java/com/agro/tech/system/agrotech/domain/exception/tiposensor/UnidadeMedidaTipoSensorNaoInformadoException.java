@@ -1,7 +1,7 @@
-package com.agro.tech.system.agrotech.domain.exception;
+package com.agro.tech.system.agrotech.domain.exception.tiposensor;
 
 public class UnidadeMedidaTipoSensorNaoInformadoException extends RuntimeException {
 	public UnidadeMedidaTipoSensorNaoInformadoException() {
-		super("Unidade de media do Tipo de Sensor é obrigatório!");
+		super("Unidade de medida do Tipo de Sensor é obrigatório!");
 	}
 }
