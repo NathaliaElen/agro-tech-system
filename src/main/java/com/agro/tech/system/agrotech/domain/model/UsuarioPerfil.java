@@ -1,6 +1,8 @@
 package com.agro.tech.system.agrotech.domain.model;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
+import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioPerfilEntity;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -9,11 +11,27 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 public class UsuarioPerfil {
-    private String Id;
-    private String nome;
-    private Status status;
+    private String usuarioId;
+    private String perfilId;
     private LocalDateTime criadoEm;
-    private LocalDateTime atualizadoEm;
     private String criadoPor;
+    private LocalDateTime atualizadoEm;
     private String atualizadoPor;
+    private boolean isAdmin;
+
+    public UsuarioPerfil(String usuarioId,
+                         String perfilId,
+                         LocalDateTime criadoEm,
+                         String criadoPor,
+                         LocalDateTime atualizadoEm,
+                         String atualizadoPor,
+                         boolean isAdmin) {
+        this.usuarioId = usuarioId;
+        this.perfilId = perfilId;
+        this.criadoEm = criadoEm;
+        this.criadoPor = criadoPor;
+        this.atualizadoEm = atualizadoEm;
+        this.atualizadoPor = atualizadoPor;
+        this.isAdmin = isAdmin;
+    }
 }

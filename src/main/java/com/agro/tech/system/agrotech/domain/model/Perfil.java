@@ -1,20 +1,31 @@
 package com.agro.tech.system.agrotech.domain.model;
 
+import com.agro.tech.system.agrotech.domain.enums.Status;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Getter 
 @ToString
 public class Perfil {
-	private Long id;
+	private String id;
 	private String nome;
-	private String descricao;
-	
-	public Perfil(Long id, String nome, String descricao) {
+	private Status status;
+	private LocalDateTime criadoEm;
+	private String criadoPor;
+	private String atualizadoPor;
+	private LocalDateTime atualizadoEm;
+
+	public Perfil(String id, String nome, Status status, LocalDateTime criadoEm, String criadoPor,  String atualizadoPor, LocalDateTime atualizadoEm) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.descricao = descricao;
+		this.status = status;
+		this.criadoEm = criadoEm;
+		this.criadoPor = criadoPor;
+		this.atualizadoPor = atualizadoPor;
+		this.atualizadoEm = atualizadoEm;
 		
 		// Validar se o nome é nulo ou vaio
 		if (this.nome == null || this.nome.isBlank()) {

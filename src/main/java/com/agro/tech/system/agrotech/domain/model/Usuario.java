@@ -1,6 +1,7 @@
 package com.agro.tech.system.agrotech.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
 
@@ -11,6 +12,7 @@ import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInf
 import com.agro.tech.system.agrotech.domain.extensions.validations.EmailValidator;
 import lombok.Getter;
 import lombok.ToString;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 @Getter
 @ToString(exclude = "senhaHash")
@@ -24,10 +26,10 @@ public class Usuario {
 	private LocalDateTime atualizadoEm;
 	private String criadoPor;
 	private String atualizadoPor;
-	UsuarioPerfil usuarioPerfil;
+	List<UsuarioPerfil> usuariosPerfil;
 	
 	public Usuario(String id, String nome, String email, String senhaHash, Status status, LocalDateTime criadoEm,
-			LocalDateTime atualizadoEm, UsuarioPerfil usuarioPerfil, String criadoPor, String atualizadoPor) {
+				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, List<UsuarioPerfil> usuariosPerfil) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -38,7 +40,7 @@ public class Usuario {
 		this.criadoPor = criadoPor;
 		this.atualizadoEm = atualizadoEm;
 		this.atualizadoPor = atualizadoPor;
-		this.usuarioPerfil = usuarioPerfil;
+		this.usuariosPerfil = usuariosPerfil;
 
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
@@ -61,6 +63,6 @@ public class Usuario {
 	}
 
 	public boolean isAdmin() {
-		return this.usuarioPerfil.getNome().equals("ADMIN");
+		return this.isAdmin();
 	}
 }

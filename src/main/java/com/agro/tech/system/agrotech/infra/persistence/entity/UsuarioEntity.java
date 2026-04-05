@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
 
 @Entity
 @Table(name = "usuarios")
@@ -22,7 +20,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "id")
 public class UsuarioEntity implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false)
@@ -43,10 +41,9 @@ public class UsuarioEntity implements UserDetails {
     private LocalDateTime criadoEm;
 
     @Column(nullable = false)
-    private LocalDateTime atualizadoEm;
-
-    @Column(nullable = false)
     private String criadoPor;
+
+    private LocalDateTime atualizadoEm;
 
     private String atualizadoPor;
 
@@ -54,8 +51,9 @@ public class UsuarioEntity implements UserDetails {
     @JoinTable(
             name = "usuario_perfil",
             joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "perfil_id"))
-    private Set<UsuarioPerfilEntity> usuarioPerfil;
+            inverseJoinColumns = @JoinColumn(name = "perfil_id")
+    )
+    private List<UsuarioPerfilEntity> usuarioPerfil;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -18,14 +18,23 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usuarios_perfil")
+@Table(name = "perfis")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioPerfilEntity {
-    private String usuarioId;
-    private String perfilId;
+@EqualsAndHashCode(of = "id")
+public class PerfilEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @Column(nullable = false)
+    private String nome;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
 
     @Column(nullable = false)
     private LocalDateTime criadoEm;
@@ -35,5 +44,4 @@ public class UsuarioPerfilEntity {
 
     private LocalDateTime atualizadoEm;
     private String atualizadoPor;
-    private boolean isAdmin;
 }
