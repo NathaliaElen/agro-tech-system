@@ -35,22 +35,12 @@ public class Sensor {
 			LocalDateTime criadoEm, 
 			LocalDateTime atualizadoEm
 			) {
-		super();
-		this.id = id;
-		this.areaId = areaId;
-		this.tipoSensorId = tipoSensorId;
-		this.codigo = codigo;
-		this.intervaloSegundos = intervaloSegundos;
-		this.status = status;
-		this.instaladoEm = instaladoEm;
-		this.criadoEm = criadoEm;
-		this.atualizadoEm = atualizadoEm;
 		
 		if(areaId == null || areaId.isBlank()) {
 			throw new AreaIdSensorNaoInformadaException();
 		}
 
-		if(tipoSensorId == null || areaId.isBlank()) {
+		if(tipoSensorId == null || tipoSensorId.isBlank()) {
 			throw new TipoSensorIdNaoInformadoException();
 		}
 		
@@ -61,18 +51,30 @@ public class Sensor {
 		if(intervaloSegundos == null || intervaloSegundos <= 0) {
 			throw new IntervaloSegundosSensorNaoInformadoException();
 		}
+		
+		this.id = id;
+		this.areaId = areaId;
+		this.tipoSensorId = tipoSensorId;
+		this.codigo = codigo;
+		this.intervaloSegundos = intervaloSegundos;
+		this.status = status;
+		this.instaladoEm = instaladoEm;
+		this.criadoEm = criadoEm;
+		this.atualizadoEm = atualizadoEm;
 	}
 	
-	//comportamentos do domínio
-	public void ativarStatus() {
+	// comportamentos do domínio
+	public void ativar() {
 		this.status = Status.ATIVO;
+		this.atualizadoEm = LocalDateTime.now();
 	}
 		
-	public void desativarStatus() {
+	public void desativar() {
 		this.status = Status.INATIVO;
+		this.atualizadoEm = LocalDateTime.now();
 	}
 		
-	public Status isStatus() {
-		return status;
+	public boolean isAtivo() {
+		return this.status == Status.ATIVO;
 	}
 }

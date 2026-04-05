@@ -17,12 +17,6 @@ public class TipoSensor {
 	private Status status;
 	
 	public TipoSensor(String id, String nome, String unidadeMedida, String descricao, Status status) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.unidadeMedida = unidadeMedida;
-		this.descricao = descricao;
-		this.status = status;
 		
 		if(nome == null || nome.isBlank()) {
 			throw new NomeTipoSensorNaoInformadoException();
@@ -31,5 +25,28 @@ public class TipoSensor {
 		if(unidadeMedida == null || unidadeMedida.isBlank()) {
 			throw new UnidadeMedidaTipoSensorNaoInformadoException();
 		}
+		
+		this.id = id;
+		this.nome = nome;
+		this.unidadeMedida = unidadeMedida;
+		this.descricao = descricao;
+		this.status = status != null ? status : Status.ATIVO;
+	}
+	
+	// comportamentos do domínio
+	public void ativar() {
+	    this.status = Status.ATIVO;
+	}
+	
+	public void desativar() {
+	    this.status = Status.INATIVO;
+	}
+	
+	public boolean isAtivo() {
+	    return this.status == Status.ATIVO;
+	}
+	
+	public void atualizarDescricao(String novaDescricao) {
+	    this.descricao = novaDescricao;
 	}
 }
