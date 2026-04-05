@@ -1,6 +1,8 @@
 package com.agro.tech.system.agrotech.domain.model;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
+import com.agro.tech.system.agrotech.domain.exception.usuarioperfil.PerfilIdNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.usuarioperfil.UsuarioIdNaoInformadoException;
 import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioPerfilEntity;
 import jakarta.persistence.Column;
 import lombok.Getter;
@@ -33,5 +35,15 @@ public class UsuarioPerfil {
         this.atualizadoEm = atualizadoEm;
         this.atualizadoPor = atualizadoPor;
         this.isAdmin = isAdmin;
+
+        if (usuarioId == null) {
+            throw new UsuarioIdNaoInformadoException();
+        }
+
+        if (perfilId == null) {
+            throw new PerfilIdNaoInformadoException();
+        }
     }
+
+
 }

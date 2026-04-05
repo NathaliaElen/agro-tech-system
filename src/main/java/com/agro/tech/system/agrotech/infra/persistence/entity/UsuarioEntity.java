@@ -53,7 +53,7 @@ public class UsuarioEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "perfil_id")
     )
-    private List<UsuarioPerfilEntity> usuarioPerfil;
+    private List<UsuarioPerfilEntity> usuariosPerfil;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -12,7 +12,6 @@ import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInf
 import com.agro.tech.system.agrotech.domain.extensions.validations.EmailValidator;
 import lombok.Getter;
 import lombok.ToString;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 @Getter
 @ToString(exclude = "senhaHash")
@@ -31,6 +30,8 @@ public class Usuario {
 	public Usuario(String id, String nome, String email, String senhaHash, Status status, LocalDateTime criadoEm,
 				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, List<UsuarioPerfil> usuariosPerfil) {
 		super();
+
+		//perguntar se a ordem muda no java?
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -60,9 +61,11 @@ public class Usuario {
 		if (this.senhaHash == null || this.senhaHash.isBlank()) {
 			throw new SenhaUsuarioNaoInformadaException();
 		}
+
 	}
 
 	public boolean isAdmin() {
-		return this.isAdmin();
+		return this.usuariosPerfil.getFirst().isAdmin();
 	}
+
 }

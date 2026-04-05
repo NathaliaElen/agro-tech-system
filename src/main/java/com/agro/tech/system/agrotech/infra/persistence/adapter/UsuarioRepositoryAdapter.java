@@ -29,7 +29,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
 
     @Override
     public Optional<Usuario> buscarPorNome(String nome) {
-        return jpa.findByName(nome).map(this::toDomain);
+        return jpa.findByNome(nome).map(this::toDomain);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class UsuarioRepositoryAdapter implements UsuarioRepository {
                 entity.getCriadoPor(),
                 entity.getAtualizadoEm(),
                 entity.getAtualizadoPor(),
-                toDomain(entity.getUsuarioPerfil())
+                toDomain(entity.getUsuariosPerfil())
         );
     }
 
