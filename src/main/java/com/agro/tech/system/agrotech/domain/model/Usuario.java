@@ -1,49 +1,75 @@
 package com.agro.tech.system.agrotech.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
 
+import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioInvalidoException;
+import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.extensions.validations.EmailValidator;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString(exclude = "senhaHash")
 public class Usuario {
-	private Long id;
+	private String id;
 	private String nome;
 	private String email;
 	private String senhaHash;
 	private Status status;
+	private List<Perfil> perfis;
 	private LocalDateTime criadoEm;
 	private LocalDateTime atualizadoEm;
-	
-	public Usuario(Long id, String nome, String email, String senhaHash, Status status, LocalDateTime criadoEm,
-			LocalDateTime atualizadoEm) {
+	private String criadoPor;
+	private String atualizadoPor;
+	private boolean isAdmin;
+	private UsuarioPerfil usuarioPerfil;
+
+	public Usuario(String id, String nome, String email, String senhaHash, Status status,List<Perfil> perfis, LocalDateTime criadoEm,
+				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, boolean isAdmin, UsuarioPerfil usuarioPerfil) {
 		super();
+
+		//perguntar se a ordem muda no java?
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senhaHash = senhaHash;
 		this.status = status;
+		this.perfis = perfis;
 		this.criadoEm = criadoEm;
+		this.criadoPor = criadoPor;
 		this.atualizadoEm = atualizadoEm;
-		
+		this.atualizadoPor = atualizadoPor;
+		this.usuarioPerfil = usuarioPerfil;
+		this.isAdmin = isAdmin;
+
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
-			//throw new 
+			throw new NomeUsuarioNaoInformadoException();
 		}
-		
+
 		// Validar se email é nulo ou vazio
 		if (this.email == null || this.email.isBlank()) {
-			//throw new
+			throw new EmailUsuarioNaoInformadoException();
 		}
-		
+
+		if (!EmailValidator.isValido(this.email)) {
+			throw new EmailUsuarioInvalidoException();
+		}
+
 		// Validar se senha é nula ou vazia
 		if (this.senhaHash == null || this.senhaHash.isBlank()) {
-			//throw new
+			throw new SenhaUsuarioNaoInformadaException();
 		}
+
 	}
-	
-	
+
+	public boolean isAdmin() {
+		return this.isAdmin();
+	}
+
 }
