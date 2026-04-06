@@ -1,14 +1,13 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
 
-import org.springframework.stereotype.Component;
 import com.agro.tech.system.agrotech.domain.model.Area;
 import com.agro.tech.system.agrotech.infra.persistence.entity.AreaEntity;
 
-@Component
+
 public class AreaMapper {
 
-    public AreaEntity toEntity(Area area) {
+    public static AreaEntity toEntity(Area area) {
         AreaEntity entity = new AreaEntity();
         entity.setId(area.getId());
         entity.setNome(area.getNome());
@@ -21,7 +20,7 @@ public class AreaMapper {
     }
 
     
-    public Area toDomain(AreaEntity entity) {
+    public static Area toDomain(AreaEntity entity) {
     	Area area = new Area(       
                 entity.getId(),
                 entity.getNome(),

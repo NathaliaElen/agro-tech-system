@@ -46,7 +46,7 @@ public class AreaEntity {
     @Column(nullable = false, name = "localizacao_lon" )
     private Double longitude;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "status")
     private Status status;
 
