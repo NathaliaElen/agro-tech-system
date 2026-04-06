@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.TipoSensor;
 import com.agro.tech.system.agrotech.domain.repository.TipoSensorRepository;
-import com.agro.tech.system.agrotech.infra.persistence.entity.TipoSensorEntity;
+import com.agro.tech.system.agrotech.infra.persistence.mapper.TipoSensorMapper;
 import com.agro.tech.system.agrotech.infra.persistence.repository.JpaTipoSensorRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,57 +21,35 @@ public class TipoSensorRepositoryAdapter implements TipoSensorRepository {
 	
 	@Override
 	public TipoSensor salvar(TipoSensor tipoSensor) {
-		return toDomain(jpa.save(toEntity(tipoSensor)));
+		return TipoSensorMapper.toDomain(jpa.save(TipoSensorMapper.toEntity(tipoSensor)));
 	}
 
 	@Override
 	public Optional<TipoSensor> buscarPorId(String id) {
-		return jpa.findById(id).map(this::toDomain);
+		return jpa.findById(id).map(TipoSensorMapper::toDomain);
 	}
 
 	@Override
 	public Optional<TipoSensor> buscarPorNome(String nome) {
-		return jpa.findByNome(nome).map(this::toDomain);
+		return jpa.findByNome(nome).map(TipoSensorMapper::toDomain);
 	}
 
 	@Override
 	public List<TipoSensor> buscarTodos() {
 		return jpa.findAll().stream()
-				.map(this::toDomain)
+				.map(TipoSensorMapper::toDomain)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<TipoSensor> buscarPorStatus(Status status) {
 		return jpa.findByStatus(status).stream()
-				.map(this::toDomain)
+				.map(TipoSensorMapper::toDomain)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public void deletar(String id) {
 		jpa.deleteById(id);
-	}
-	
-	// "conversão" de entity em domain
-	private TipoSensor toDomain(TipoSensorEntity entity) {
-		return new TipoSensor(
-					entity.getId(),
-					entity.getNome(),
-					entity.getUnidadeMedida(),
-					entity.getDescricao(),
-					entity.getStatus()
-				);
-	}
-	
-	// "conversão" de domain em entity
-	private TipoSensorEntity toEntity(TipoSensor tipoSensor) {
-		return new TipoSensorEntity(
-					tipoSensor.getId(),
-					tipoSensor.getNome(),
-					tipoSensor.getUnidadeMedida(),
-					tipoSensor.getDescricao(),
-					tipoSensor.getStatus()
-				);
 	}
 }
