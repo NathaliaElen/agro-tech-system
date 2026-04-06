@@ -1,6 +1,6 @@
 package com.agro.tech.system.agrotech.domain.enums;
 
-public enum Severidade {
+public enum Prioridade {
 	BAIXA,
 	
 	MEDIA,
