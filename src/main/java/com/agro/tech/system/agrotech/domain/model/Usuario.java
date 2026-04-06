@@ -67,9 +67,4 @@ public class Usuario {
 		}
 
 	}
-
-	public boolean isAdmin() {
-		return this.isAdmin();
-	}
-
 }

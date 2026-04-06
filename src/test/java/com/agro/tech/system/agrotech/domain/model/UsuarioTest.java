@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UsuarioTest {
@@ -68,6 +69,6 @@ public class UsuarioTest {
                 null
         );
 
-        assertFalse(usuario.getPerfis().isEmpty());
+        assertNull(usuario.getPerfis());
     }
 }
