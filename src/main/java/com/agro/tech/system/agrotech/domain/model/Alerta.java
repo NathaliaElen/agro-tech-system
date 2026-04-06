@@ -6,9 +6,19 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Alerta {
-	private Long id;
-	private Long regraId;
-	private Long leituraSensorId;
-	private Long areaId;
-	private Long sensorId;
+	private String id;
+	private String regraId;
+	private String leituraSensorId;
+	private String areaId;
+	private String sensorId;
+
+	public Alerta(String id, String regraId, String leituraSensorId, String areaId, String sensorId) {
+		this.id = id;
+		this.regraId = regraId;
+		this.leituraSensorId = leituraSensorId;
+		this.areaId = areaId;
+		this.sensorId = sensorId;
+	}
 }
+
+
