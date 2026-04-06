@@ -15,7 +15,7 @@ import java.util.Date;
 public class TokenService {
     //chave secreta do jwt(posteriormente vamos definir sua origem no arquivo "application.properties")
     @Value("${api.security.secret}")
-    private String secret;
+    private String secret = "1cc1807d-64ed-4c91-b8f8-4fe26db8c6b4";
 
     public String gerarToken(UsuarioEntity usuario){
         Algorithm algoritimo = Algorithm.HMAC256(secret);
@@ -23,8 +23,8 @@ public class TokenService {
         return JWT.create()
                 .withIssuer("grupo-2-java-avanade")
                 .withSubject(usuario.getEmail())
-                .withAudience("1cc1807d-64ed-4c91-b8f8-4fe26db8c6b4")
-                .withClaim("pefil", usuario.getUsuariosPerfil())
+                .withAudience("")
+                //.withClaim("perfil", usuario.getPerfis().stream().findFirst(p))
                 .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
                 .sign(algoritimo);
     }
@@ -34,6 +34,7 @@ public class TokenService {
 
         return JWT.require(algoritimo)
                 .withIssuer("grupo-2-java-avanade")
+                .withAudience("")
                 .build()
                 .verify(token)
                 .getSubject();

@@ -13,28 +13,29 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 public class UsuarioPerfil {
+    private Long id;
     private String usuarioId;
     private String perfilId;
     private LocalDateTime criadoEm;
     private String criadoPor;
     private LocalDateTime atualizadoEm;
     private String atualizadoPor;
-    private boolean isAdmin;
 
-    public UsuarioPerfil(String usuarioId,
-                         String perfilId,
-                         LocalDateTime criadoEm,
-                         String criadoPor,
-                         LocalDateTime atualizadoEm,
-                         String atualizadoPor,
-                         boolean isAdmin) {
+    public UsuarioPerfil(
+             Long id,
+             String usuarioId,
+             String perfilId,
+             LocalDateTime criadoEm,
+             String criadoPor,
+             LocalDateTime atualizadoEm,
+             String atualizadoPor) {
+        this.id = id;
         this.usuarioId = usuarioId;
         this.perfilId = perfilId;
         this.criadoEm = criadoEm;
         this.criadoPor = criadoPor;
         this.atualizadoEm = atualizadoEm;
         this.atualizadoPor = atualizadoPor;
-        this.isAdmin = isAdmin;
 
         if (usuarioId == null) {
             throw new UsuarioIdNaoInformadoException();

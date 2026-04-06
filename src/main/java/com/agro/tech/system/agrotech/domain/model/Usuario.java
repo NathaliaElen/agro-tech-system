@@ -21,14 +21,16 @@ public class Usuario {
 	private String email;
 	private String senhaHash;
 	private Status status;
+	private List<Perfil> perfis;
 	private LocalDateTime criadoEm;
 	private LocalDateTime atualizadoEm;
 	private String criadoPor;
 	private String atualizadoPor;
-	List<UsuarioPerfil> usuariosPerfil;
-	
-	public Usuario(String id, String nome, String email, String senhaHash, Status status, LocalDateTime criadoEm,
-				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, List<UsuarioPerfil> usuariosPerfil) {
+	private boolean isAdmin;
+	private UsuarioPerfil usuarioPerfil;
+
+	public Usuario(String id, String nome, String email, String senhaHash, Status status,List<Perfil> perfis, LocalDateTime criadoEm,
+				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, boolean isAdmin, UsuarioPerfil usuarioPerfil) {
 		super();
 
 		//perguntar se a ordem muda no java?
@@ -37,11 +39,13 @@ public class Usuario {
 		this.email = email;
 		this.senhaHash = senhaHash;
 		this.status = status;
+		this.perfis = perfis;
 		this.criadoEm = criadoEm;
 		this.criadoPor = criadoPor;
 		this.atualizadoEm = atualizadoEm;
 		this.atualizadoPor = atualizadoPor;
-		this.usuariosPerfil = usuariosPerfil;
+		this.usuarioPerfil = usuarioPerfil;
+		this.isAdmin = isAdmin;
 
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
@@ -65,7 +69,7 @@ public class Usuario {
 	}
 
 	public boolean isAdmin() {
-		return this.usuariosPerfil.getFirst().isAdmin();
+		return this.isAdmin();
 	}
 
 }

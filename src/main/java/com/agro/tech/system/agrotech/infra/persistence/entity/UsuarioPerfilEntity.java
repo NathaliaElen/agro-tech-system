@@ -24,6 +24,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioPerfilEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String usuarioId;
     private String perfilId;
 
@@ -35,5 +38,4 @@ public class UsuarioPerfilEntity {
 
     private LocalDateTime atualizadoEm;
     private String atualizadoPor;
-    private boolean isAdmin;
 }

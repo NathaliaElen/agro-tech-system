@@ -17,7 +17,7 @@ public class Perfil {
 	private String atualizadoPor;
 	private LocalDateTime atualizadoEm;
 
-	public Perfil(String id, String nome, Status status, LocalDateTime criadoEm, String criadoPor,  String atualizadoPor, LocalDateTime atualizadoEm) {
+	public Perfil(String id, String nome, Status status, LocalDateTime criadoEm, String criadoPor,  LocalDateTime atualizadoEm, String atualizadoPor) {
 		super();
 		this.id = id;
 		this.nome = nome;
