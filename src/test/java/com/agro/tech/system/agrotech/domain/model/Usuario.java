@@ -12,28 +12,19 @@ class UsuarioTest {
 
     @Test
     void deveRetornarTrueQuandoPossuiPerfilIsAdmin() {
-        UsuarioPerfil admin = new UsuarioPerfil(
-                "u1",
-                "p1",
-                LocalDateTime.now(),
-                "",
-                null,
-                null,
-                true
-
-        );
-
         Usuario usuario = new Usuario(
-                "u1",
-                "Dan",
-                "dan@email.com",
+                "u2",
+                "Ana",
+                "ana@email.com",
                 "senha",
                 Status.ATIVO,
+                List.of(),
                 LocalDateTime.now(),
                 "system",
                 null,
                 null,
-                List.of(admin)
+                true,
+                null
         );
 
         assertTrue(usuario.isAdmin());
@@ -41,15 +32,6 @@ class UsuarioTest {
 
     @Test
     void deveRetornarFalseQuandoNaoPossuiPerfilAdmin() {
-        UsuarioPerfil user = new UsuarioPerfil(
-                "u2",
-                "p1",
-                LocalDateTime.now(),
-                "system",
-                null,
-                null,
-                false
-        );
 
         Usuario usuario = new Usuario(
                 "u2",
@@ -57,11 +39,13 @@ class UsuarioTest {
                 "ana@email.com",
                 "senha",
                 Status.ATIVO,
+                List.of(),
                 LocalDateTime.now(),
                 "system",
                 null,
                 null,
-                List.of(user)
+                false,
+                null
         );
 
         assertFalse(usuario.isAdmin());
@@ -70,18 +54,20 @@ class UsuarioTest {
     @Test
     void deveRetornarFalseQuandoListaDePerfisForNula() {
         Usuario usuario = new Usuario(
-                "u3",
-                "Bob",
-                "bob@email.com",
+                "u2",
+                "Ana",
+                "ana@email.com",
                 "senha",
                 Status.ATIVO,
+                null,
                 LocalDateTime.now(),
                 "system",
                 null,
                 null,
+                false,
                 null
         );
 
-        assertFalse(usuario.isAdmin());
+        assertFalse(usuario.getPerfis().isEmpty());
     }
 }
