@@ -18,6 +18,8 @@ public class TipoSensor {
 	
 	public TipoSensor(String id, String nome, String unidadeMedida, String descricao, Status status) {
 		
+		super();
+		
 		if(nome == null || nome.isBlank()) {
 			throw new NomeTipoSensorNaoInformadoException();
 		}

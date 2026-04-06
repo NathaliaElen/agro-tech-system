@@ -3,7 +3,7 @@ package com.agro.tech.system.agrotech.domain.model;
 import java.time.LocalDateTime;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
-import com.agro.tech.system.agrotech.domain.exception.sensor.AreaIdSensorNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.exception.area.AreaIdNaoInformadaException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.CodigoSensorNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.IntervaloSegundosSensorNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.TipoSensorIdNaoInformadoException;
@@ -36,8 +36,10 @@ public class Sensor {
 			LocalDateTime atualizadoEm
 			) {
 		
+		super();
+		
 		if(areaId == null || areaId.isBlank()) {
-			throw new AreaIdSensorNaoInformadaException();
+			throw new AreaIdNaoInformadaException();
 		}
 
 		if(tipoSensorId == null || tipoSensorId.isBlank()) {
