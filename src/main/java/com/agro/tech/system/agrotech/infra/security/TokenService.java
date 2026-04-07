@@ -1,8 +1,10 @@
 package com.agro.tech.system.agrotech.infra.security;
 
+import com.agro.tech.system.agrotech.infra.persistence.entity.PerfilEntity;
 import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +25,12 @@ public class TokenService {
         return JWT.create()
                 .withIssuer("grupo-2-java-avanade")
                 .withSubject(usuario.getEmail())
-                .withAudience("")
-                //.withClaim("perfil", usuario.getPerfis().stream().findFirst(p))
+                .withClaim("role", usuario.getPerfis().stream()
+                        .filter(perfil -> perfil.getId().equals(usuario.getUsuarioPerfil().getPerfilId()))
+                        .map(PerfilEntity::getNome)
+                        .map(String::toUpperCase)
+                        .findFirst()
+                        .orElse("USER"))
                 .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
                 .sign(algoritimo);
     }
@@ -34,7 +40,6 @@ public class TokenService {
 
         return JWT.require(algoritimo)
                 .withIssuer("grupo-2-java-avanade")
-                .withAudience("")
                 .build()
                 .verify(token)
                 .getSubject();

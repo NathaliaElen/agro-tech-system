@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "usuarios")
@@ -41,6 +40,12 @@ public class UsuarioEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_perfil",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "perfil_id")
+    )
     private List<PerfilEntity> perfis;
 
     @Column(nullable = false)
@@ -59,27 +64,23 @@ public class UsuarioEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //como obter a lista de perfis?
-
         if (perfis == null) return Collections.emptyList();
 
-        Optional<PerfilEntity> perfilEntity = perfis.stream()
-                .filter(perfil -> perfil != null
-                        && perfil.getId() != null
-                        && perfil.getId().equals(usuarioPerfil.getUsuarioId()))
-                .findFirst();
+        PerfilEntity perfilEntity = perfis.stream()
+                .filter(p -> p.getId().equals(usuarioPerfil.getPerfilId()))
+                .findFirst()
+                .orElse(new PerfilEntity());
 
+        boolean isAdmin = perfilEntity.getNome().equalsIgnoreCase("ADMIN");
         var listaPerfil = new ArrayList<SimpleGrantedAuthority>();
 
-        boolean isAdmin = this.perfis.stream()
-                .anyMatch(p -> p != null && "ADMIN".equalsIgnoreCase(p.getNome()));
-
         if (isAdmin) {
-            perfis.stream().forEach(perfil -> {
-                listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + perfil.getNome().toUpperCase()));
-            });
+            for (PerfilEntity p : perfis) {
+            	listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + p.getNome().toUpperCase()));
+
+            }
         } else {
-            listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + perfilEntity.get().getNome().toUpperCase()));
+            listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + perfilEntity.getNome().toUpperCase()));
         }
 
         return listaPerfil;
