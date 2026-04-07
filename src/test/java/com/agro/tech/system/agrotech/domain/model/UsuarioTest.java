@@ -54,7 +54,7 @@ public class UsuarioTest {
     }
 
     @Test
-    @DisplayName("Deve Retornar True Quando não é Admin")
+    @DisplayName("Deve Retornar False Quando não é Admin")
     void deveRetornarFalseQuandoNaoPossuiPerfilAdmin() {
 
         Usuario usuario = new Usuario(
