@@ -47,6 +47,6 @@ public class Alerta {
 		//this.dataHoraResolucao = dataHoraResolucao;
 		//this.usuarioId;		
 	}
-	
-
 }
+
+
