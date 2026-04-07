@@ -17,7 +17,7 @@ import java.util.Date;
 public class TokenService {
     //chave secreta do jwt(posteriormente vamos definir sua origem no arquivo "application.properties")
     @Value("${api.security.secret}")
-    private String secret = "1cc1807d-64ed-4c91-b8f8-4fe26db8c6b4";
+    private String secret;
 
     public String gerarToken(UsuarioEntity usuario){
         Algorithm algoritimo = Algorithm.HMAC256(secret);
