@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
 
+import com.agro.tech.system.agrotech.domain.exception.perfil.ListaDePerfisNullException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioInvalidoException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
@@ -26,11 +27,10 @@ public class Usuario {
 	private LocalDateTime atualizadoEm;
 	private String criadoPor;
 	private String atualizadoPor;
-	private boolean isAdmin;
 	private UsuarioPerfil usuarioPerfil;
 
 	public Usuario(String id, String nome, String email, String senhaHash, Status status,List<Perfil> perfis, LocalDateTime criadoEm,
-				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, boolean isAdmin, UsuarioPerfil usuarioPerfil) {
+				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, UsuarioPerfil usuarioPerfil) {
 		super();
 
 		//perguntar se a ordem muda no java?
@@ -45,7 +45,6 @@ public class Usuario {
 		this.atualizadoEm = atualizadoEm;
 		this.atualizadoPor = atualizadoPor;
 		this.usuarioPerfil = usuarioPerfil;
-		this.isAdmin = isAdmin;
 
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
@@ -66,5 +65,15 @@ public class Usuario {
 			throw new SenhaUsuarioNaoInformadaException();
 		}
 
+		if (perfis == null || perfis.isEmpty()) {
+			throw new ListaDePerfisNullException();
+		}
+	}
+
+	public boolean isAdmin(){
+		return this.perfis != null
+				&& this.perfis.stream()
+				.anyMatch(p -> p != null && "ADMIN".equalsIgnoreCase(p.getNome()));
 	}
 }
+

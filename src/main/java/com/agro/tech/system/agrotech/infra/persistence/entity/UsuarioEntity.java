@@ -1,12 +1,9 @@
 package com.agro.tech.system.agrotech.infra.persistence.entity;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
-import com.agro.tech.system.agrotech.domain.model.Perfil;
-import com.agro.tech.system.agrotech.domain.model.UsuarioPerfil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
-import org.springframework.data.repository.query.parser.Part;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,8 +52,6 @@ public class UsuarioEntity implements UserDetails {
     private LocalDateTime atualizadoEm;
 
     private String atualizadoPor;
-    private boolean isAdmin;
-
 
     @ManyToOne
     @JoinColumn(name = "usuario_perfil_id")
@@ -76,9 +71,10 @@ public class UsuarioEntity implements UserDetails {
 
         var listaPerfil = new ArrayList<SimpleGrantedAuthority>();
 
+        boolean isAdmin = this.perfis.stream()
+                .anyMatch(p -> p != null && "ADMIN".equalsIgnoreCase(p.getNome()));
 
-
-        if (this.isAdmin) {
+        if (isAdmin) {
             perfis.stream().forEach(perfil -> {
                 listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + perfil.getNome().toUpperCase()));
             });
