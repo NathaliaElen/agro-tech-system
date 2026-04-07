@@ -12,20 +12,17 @@ import lombok.ToString;
 public class Alerta {
 	private String id;
 	private String regraId;
-	private String leituraId;
-	private Prioridade prioridade;
-	private String titulo;
-	private String mensagem;
-	private LocalDateTime dataHoraCriacao;
-	private LocalDateTime dataHoraResolucao;
-	private String usuarioId;
-	
-	
-	public Alerta(String id,String regraId, String leituraId, Prioridade prioridade,String titulo, String mensagem, LocalDateTime dataHoraResolucao, String usuarioId) {
-		super();
-		
-		
-	}
-	
+	private String leituraSensorId;
+	private String areaId;
+	private String sensorId;
 
+	public Alerta(String id, String regraId, String leituraSensorId, String areaId, String sensorId) {
+		this.id = id;
+		this.regraId = regraId;
+		this.leituraSensorId = leituraSensorId;
+		this.areaId = areaId;
+		this.sensorId = sensorId;
+	}
 }
+
+
