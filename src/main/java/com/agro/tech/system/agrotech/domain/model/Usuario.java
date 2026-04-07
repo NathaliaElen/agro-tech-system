@@ -10,7 +10,7 @@ import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioInvali
 import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInformadaException;
-import com.agro.tech.system.agrotech.domain.extensions.validations.EmailValidator;
+import com.agro.tech.system.agrotech.domain.strategy.usuario.EmailValidator;
 import lombok.Getter;
 import lombok.ToString;
 

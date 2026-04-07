@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.domain.extensions.validations;
+package com.agro.tech.system.agrotech.domain.strategy.usuario;
 
 import java.util.regex.Pattern;
 
