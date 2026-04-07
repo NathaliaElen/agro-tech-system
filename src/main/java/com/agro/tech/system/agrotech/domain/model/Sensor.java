@@ -3,8 +3,10 @@ package com.agro.tech.system.agrotech.domain.model;
 import java.time.LocalDateTime;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
-import com.agro.tech.system.agrotech.domain.exception.AreaNaoInformadaException;
-import com.agro.tech.system.agrotech.domain.exception.TipoSensorIdNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.area.AreaIdNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.exception.sensor.CodigoSensorNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.sensor.IntervaloSegundosSensorNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.sensor.TipoSensorIdNaoInformadoException;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -12,9 +14,9 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Sensor {
-	private Long id;
-	private Long areaId;
-	private Long tipoSensorId;
+	private String id;
+	private String areaId;
+	private String tipoSensorId;
 	private String codigo;
 	private Integer intervaloSegundos;
 	private Status status;
@@ -23,9 +25,9 @@ public class Sensor {
 	private LocalDateTime atualizadoEm;
 	
 	public Sensor(
-			Long id, 
-			Long areaId, 
-			Long tipoSensorId, 
+			String id, 
+			String areaId, 
+			String tipoSensorId, 
 			String codigo, 
 			Integer intervaloSegundos, 
 			Status status,
@@ -33,7 +35,25 @@ public class Sensor {
 			LocalDateTime criadoEm, 
 			LocalDateTime atualizadoEm
 			) {
+		
 		super();
+		
+		if(areaId == null || areaId.isBlank()) {
+			throw new AreaIdNaoInformadaException();
+		}
+
+		if(tipoSensorId == null || tipoSensorId.isBlank()) {
+			throw new TipoSensorIdNaoInformadoException();
+		}
+		
+		if(codigo == null || codigo.isBlank()) {
+			throw new CodigoSensorNaoInformadoException();
+		}
+		
+		if(intervaloSegundos == null || intervaloSegundos <= 0) {
+			throw new IntervaloSegundosSensorNaoInformadoException();
+		}
+		
 		this.id = id;
 		this.areaId = areaId;
 		this.tipoSensorId = tipoSensorId;
@@ -43,36 +63,20 @@ public class Sensor {
 		this.instaladoEm = instaladoEm;
 		this.criadoEm = criadoEm;
 		this.atualizadoEm = atualizadoEm;
-		
-		// Validar se a área id é nulo
-		if(areaId == null) {
-			throw new AreaNaoInformadaException();
-		}
-		// Validar se o tipo do sensor é nulo
-		if(tipoSensorId == null) {
-			throw new TipoSensorIdNaoInformadoException();
-		}
-		// Validar se o código é nulo ou vazio
-		if(codigo == null || codigo.isBlank()) {
-			
-		}
-		// Validar se o intervalo é diferente denulo ou menor que 0, não pode ser negativo
-		if(intervaloSegundos <= 0) {
-			
-		}
 	}
 	
-	//comportamentos do domínio
-	public void ativarStatus() {
+	// comportamentos do domínio
+	public void ativar() {
 		this.status = Status.ATIVO;
+		this.atualizadoEm = LocalDateTime.now();
 	}
 		
-	public void desativarStatus() {
+	public void desativar() {
 		this.status = Status.INATIVO;
+		this.atualizadoEm = LocalDateTime.now();
 	}
 		
-	public Status isStatus() {
-		return status;
+	public boolean isAtivo() {
+		return this.status == Status.ATIVO;
 	}
-	
 }

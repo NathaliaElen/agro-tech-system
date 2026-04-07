@@ -2,7 +2,7 @@ package com.agro.tech.system.agrotech.domain.model;
 
 import java.time.LocalDateTime;
 
-import com.agro.tech.system.agrotech.domain.enums.Severidade;
+import com.agro.tech.system.agrotech.domain.enums.Prioridade;
 import com.agro.tech.system.agrotech.domain.enums.Status;
 
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class Regra {
 	private Long tipoSensorId;
 	private Double limiteMin;
 	private Double limiteMax;
-	private Severidade severidade;
+	private Prioridade prioridade;
 	private Long areaId;
 	private Long sensorId;
 	private Status status;
@@ -25,7 +25,7 @@ public class Regra {
 	private LocalDateTime atualizadoEm;
 	
 	public Regra(Long id, String nome, String descricao, Long tipoSensorId, Double limiteMin, Double limiteMax,
-			Severidade severidade, Long areaId, Long sensorId, Status status, LocalDateTime criadoEm,
+			Prioridade prioridade, Long areaId, Long sensorId, Status status, LocalDateTime criadoEm,
 			LocalDateTime atualizadoEm) {
 		super();
 		this.id = id;
@@ -34,7 +34,7 @@ public class Regra {
 		this.tipoSensorId = tipoSensorId;
 		this.limiteMin = limiteMin;
 		this.limiteMax = limiteMax;
-		this.severidade = severidade;
+		this.prioridade = prioridade;
 		this.areaId = areaId;
 		this.sensorId = sensorId;
 		this.status = status;

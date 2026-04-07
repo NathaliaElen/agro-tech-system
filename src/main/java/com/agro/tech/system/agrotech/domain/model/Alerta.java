@@ -1,5 +1,9 @@
 package com.agro.tech.system.agrotech.domain.model;
 
+import java.time.LocalDateTime;
+
+import com.agro.tech.system.agrotech.domain.enums.Prioridade;
+
 import lombok.Getter;
 import lombok.ToString;
 

@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.domain.exception;
+package com.agro.tech.system.agrotech.domain.exception.tiposensor;
 
 public class NomeTipoSensorNaoInformadoException extends RuntimeException {
 	public NomeTipoSensorNaoInformadoException() {
