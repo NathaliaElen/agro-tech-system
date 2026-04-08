@@ -26,7 +26,7 @@ import lombok.Setter;
 public class TipoSensorEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	@Column(updatable = false, nullable = false, name = "id")
+	@Column(updatable = false, nullable = false, length = 50, name = "id")
 	private String id;
 	
 	@Column(nullable = false, length = 80, name = "nome")

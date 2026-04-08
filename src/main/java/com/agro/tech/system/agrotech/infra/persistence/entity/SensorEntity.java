@@ -28,13 +28,13 @@ import lombok.Setter;
 public class SensorEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	@Column(updatable = false, nullable = false, name = "id")
+	@Column(updatable = false, nullable = false, length = 50, name = "id")
 	private String id;
 	
-	@Column(nullable = false, name = "area_id")
+	@Column(nullable = false, length = 50, name = "area_id")
 	private String areaId;
 	
-	@Column(nullable = false, name = "tipo_sensor_id")
+	@Column(nullable = false, length = 50, name = "tipo_sensor_id")
 	private String tipoSensorId;
 	
 	@Column(nullable = false, length = 60, name = "codigo")
