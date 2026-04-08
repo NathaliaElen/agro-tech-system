@@ -11,21 +11,21 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Regra {
-	private Long id;
+	private String id;
 	private String nome;
 	private String descricao;
-	private Long tipoSensorId;
+	private String tipoSensorId;
 	private Double limiteMin;
 	private Double limiteMax;
 	private Prioridade prioridade;
-	private Long areaId;
-	private Long sensorId;
+	private String areaId;
+	private String sensorId;
 	private Status status;
 	private LocalDateTime criadoEm;
 	private LocalDateTime atualizadoEm;
 	
-	public Regra(Long id, String nome, String descricao, Long tipoSensorId, Double limiteMin, Double limiteMax,
-			Prioridade prioridade, Long areaId, Long sensorId, Status status, LocalDateTime criadoEm,
+	public Regra(String id, String nome, String descricao, String tipoSensorId, Double limiteMin, Double limiteMax,
+			Prioridade prioridade, String areaId, String sensorId, Status status, LocalDateTime criadoEm,
 			LocalDateTime atualizadoEm) {
 		super();
 		this.id = id;
