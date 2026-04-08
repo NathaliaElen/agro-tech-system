@@ -15,4 +15,13 @@ public enum Prioridade {
 	public String getDescricao() {
 		return descricao;
 	}
+	
+    public static Prioridade fromDescricao(String descricao) {
+        for (Prioridade p : Prioridade.values()) {
+            if (p.getDescricao().equals(descricao)) {
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("Descrição inválida: " + descricao);
+    }	
 }

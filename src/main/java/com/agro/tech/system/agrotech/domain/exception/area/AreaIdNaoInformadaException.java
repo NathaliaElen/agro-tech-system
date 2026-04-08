@@ -1,7 +1,10 @@
 package com.agro.tech.system.agrotech.domain.exception.area;
 
 public class AreaIdNaoInformadaException extends RuntimeException {
+	
+	private static final long serialVersionUID = 1L;
+	
 	public AreaIdNaoInformadaException() {
-		super("Área Id do Sensor é obrigatória!");
+		super("Área é obrigatória!");
 	}
 }
