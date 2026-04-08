@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import com.agro.tech.system.agrotech.domain.enums.Prioridade;
 import com.agro.tech.system.agrotech.domain.enums.Status;
+import com.agro.tech.system.agrotech.domain.exception.regra.ItensDaRegraNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.exception.regra.LimiteRegraNaoInformadoException;
+import com.agro.tech.system.agrotech.domain.exception.regra.NomeRegraNaoInformadaException;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -28,6 +31,23 @@ public class Regra {
 			Prioridade prioridade, String areaId, String sensorId, Status status, LocalDateTime criadoEm,
 			LocalDateTime atualizadoEm) {
 		super();
+		
+		if ((nome == null)|| nome.isBlank()) {
+			throw new NomeRegraNaoInformadaException();
+		}
+
+		//Valida e pelo menos uma caracteristica de atuação da regra foi informada.
+		if (((tipoSensorId == null)|| tipoSensorId.isBlank())&& 
+		   ((areaId == null)|| areaId.isBlank()) &&
+		   ((sensorId == null)|| sensorId.isBlank())){
+			
+			throw new ItensDaRegraNaoInformadaException();
+		}
+		
+		if ((limiteMin == null) && limiteMax == null) {
+			throw new LimiteRegraNaoInformadoException();
+		}		
+		
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;

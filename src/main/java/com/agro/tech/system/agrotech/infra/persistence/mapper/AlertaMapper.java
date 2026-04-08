@@ -1,7 +1,5 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
-import java.time.LocalDateTime;
-
 import com.agro.tech.system.agrotech.domain.enums.Prioridade;
 import com.agro.tech.system.agrotech.domain.model.Alerta;
 import com.agro.tech.system.agrotech.infra.persistence.entity.AlertaEntity;
