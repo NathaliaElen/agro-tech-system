@@ -11,6 +11,6 @@ public interface UsuarioPerfilRepository {
     Optional<UsuarioPerfil> buscarPorUsuario(String usuarioId);
     List<UsuarioPerfil> listarTodos();
     void salvar(UsuarioPerfil perfil);
-    void deletar(String id);
+    void deletar(Long id);
     void deletarPorUsuario(String idUsuario);
 }

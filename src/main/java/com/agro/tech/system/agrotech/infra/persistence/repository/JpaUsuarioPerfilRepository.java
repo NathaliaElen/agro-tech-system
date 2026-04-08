@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface JpaUsuarioPerfilRepository extends JpaRepository<UsuarioPerfilEntity,String> {
+public interface JpaUsuarioPerfilRepository extends JpaRepository<UsuarioPerfilEntity, Long> {
     Optional<UsuarioPerfilEntity> findByPerfil(String perfilId);
     Optional<UsuarioPerfilEntity> findByUser(String usuarioId);
 }

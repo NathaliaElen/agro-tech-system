@@ -36,13 +36,13 @@ public class UsuarioPerfilRepositoryAdapter implements UsuarioPerfilRepository {
     }
 
     @Override
-    public void deletar(String id) {
+    public void deletar(Long id) {
         jpa.deleteById(id);
     }
 
     @Override
     public void deletarPorUsuario(String idUsuario) {
-        jpa.findByUser(idUsuario).ifPresent(entity -> jpa.deleteById(entity.getUsuarioId()));
+        jpa.findByUser(idUsuario).ifPresent(entity -> jpa.deleteById(entity.getId()));
     }
 
 }
