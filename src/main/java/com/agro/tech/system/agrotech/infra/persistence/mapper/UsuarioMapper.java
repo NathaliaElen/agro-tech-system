@@ -65,4 +65,11 @@ public class UsuarioMapper {
                 usuarioPerfil.getAtualizadoPor()
         );
     }
+
+    private List<Usuario> toDomain(List<UsuarioEntity> perfis) {
+        if (perfis == null) {
+            return List.of();
+        }
+        return perfis.stream().map(UsuarioMapper::toDomain).toList();
+    }
 }
