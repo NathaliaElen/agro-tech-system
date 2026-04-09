@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.exception.area.AreaIdNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.exception.sensor.CodigoSensorAcimaDoLimiteException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.CodigoSensorNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.IntervaloSegundosSensorNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.sensor.TipoSensorIdNaoInformadoException;
@@ -48,6 +49,10 @@ public class Sensor {
 		
 		if(codigo == null || codigo.isBlank()) {
 			throw new CodigoSensorNaoInformadoException();
+		}
+		
+		if(codigo.length() > 60) {
+			throw new CodigoSensorAcimaDoLimiteException();
 		}
 		
 		if(intervaloSegundos == null || intervaloSegundos <= 0) {

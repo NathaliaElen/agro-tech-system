@@ -1,11 +1,8 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
-
-import org.springframework.stereotype.Component;
 import com.agro.tech.system.agrotech.domain.model.Area;
 import com.agro.tech.system.agrotech.infra.persistence.entity.AreaEntity;
 
-@Component
 public class AreaMapper {
 
     public static AreaEntity toEntity(Area area) {
