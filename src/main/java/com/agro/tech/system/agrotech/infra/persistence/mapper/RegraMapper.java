@@ -1,18 +1,10 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
-import java.time.LocalDateTime;
-
 import com.agro.tech.system.agrotech.domain.enums.Prioridade;
 import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.Regra;
 import com.agro.tech.system.agrotech.infra.persistence.entity.RegraEntity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
 public class RegraMapper {
 
@@ -23,11 +15,7 @@ public class RegraMapper {
 		if (entity == null) {
 			return null;
 		}
-		/*
-		 * 	public Regra(String id, String nome, String descricao, String tipoSensorId, Double limiteMin, Double limiteMax,
-			Prioridade prioridade, String areaId, String sensorId, Status status, LocalDateTime criadoEm,
-			LocalDateTime atualizadoEm)
-		 * */
+
 		return new Regra(			
 				entity.getId(),
 				entity.getNome(),
