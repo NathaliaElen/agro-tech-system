@@ -11,5 +11,5 @@ import org.springframework.validation.annotation.Validated;
 public class CadastrarPerfilUseCase {
     private final PerfilRepository perfilRepository;
 
-    public Perfil
+    //public Perfil
 }

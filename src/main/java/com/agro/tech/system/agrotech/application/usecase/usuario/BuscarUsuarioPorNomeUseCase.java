@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class BuscarPorNomeUseCase {
+public class BuscarUsuarioPorNomeUseCase {
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioResponseDTO buscarPorNome(String nome){

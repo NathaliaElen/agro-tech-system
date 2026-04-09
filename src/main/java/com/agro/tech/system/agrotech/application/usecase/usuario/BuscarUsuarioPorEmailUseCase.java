@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class BuscarPorEmailUseCase {
+public class BuscarUsuarioPorEmailUseCase {
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioResponseDTO buscarPorEmail(String email){
