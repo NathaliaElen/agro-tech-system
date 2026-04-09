@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
+import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.TipoSensor;
 import com.agro.tech.system.agrotech.infra.persistence.entity.TipoSensorEntity;
 
@@ -15,7 +16,7 @@ public class TipoSensorMapper {
 				entity.getNome(),
 				entity.getUnidadeMedida(),
 				entity.getDescricao(),
-				entity.getStatus()
+				Status.fromDescricao(entity.getStatus())
 		);
 	}
 		
@@ -26,7 +27,7 @@ public class TipoSensorMapper {
 						tipoSensor.getNome(),
 						tipoSensor.getUnidadeMedida(),
 						tipoSensor.getDescricao(),
-						tipoSensor.getStatus()
+						tipoSensor.getStatus().getDescricao()
 		);
 	}
 }

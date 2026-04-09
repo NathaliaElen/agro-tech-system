@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
+import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.Sensor;
 import com.agro.tech.system.agrotech.infra.persistence.entity.SensorEntity;
 
@@ -17,7 +18,7 @@ public class SensorMapper {
 				entity.getTipoSensorId(),
 				entity.getCodigo(),
 				entity.getIntervaloSegundos(),
-				entity.getStatus(),
+				Status.fromDescricao(entity.getStatus()),
 				entity.getInstaladoEm(),
 				entity.getCriadoEm(),
 				entity.getAtualizadoEm()
@@ -32,7 +33,7 @@ public class SensorMapper {
 				sensor.getTipoSensorId(),
 				sensor.getCodigo(),
 				sensor.getIntervaloSegundos(),
-				sensor.getStatus(),
+				sensor.getStatus().getDescricao(),
 				sensor.getInstaladoEm(),
 				sensor.getCriadoEm(),
 				sensor.getAtualizadoEm()
