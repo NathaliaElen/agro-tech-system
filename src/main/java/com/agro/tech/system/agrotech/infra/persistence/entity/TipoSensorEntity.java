@@ -1,7 +1,5 @@
 package com.agro.tech.system.agrotech.infra.persistence.entity;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -40,5 +38,5 @@ public class TipoSensorEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, name = "status")
-	private Status status;
+	private String status;
 }
