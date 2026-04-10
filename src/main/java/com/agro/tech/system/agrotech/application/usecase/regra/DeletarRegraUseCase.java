@@ -15,12 +15,24 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DeletarRegraUseCase {
 	
+	//private final ListarLeituraUseCase listarLeituraUseCase;
 	private final RegraRepository  regraRepository;
 	
 	public void deletar (@Valid String id) {
 		
 		regraRepository.buscarPorId(id)
 		.orElseThrow(RegraIdNaoInformadaException::new);
+				
+		/*
+		//VALIDAR SE EXISTE ALGUMA AREA ASSOCIADA A UM ALERTA.
+		/// TODO: Pendente Elizeu
+		List<LeituraResponseDTO> listaLeitura = listarLeiturarUseCase.buscarPorAreaId(id);		
+		if (listaLeitura.size() < 1) {
+			throw new RegraExistenteNaLeituraException();
+		}
+		 */
+		
+		regraRepository.deletar(id);
 	}
 	
 }
