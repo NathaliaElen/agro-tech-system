@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.agro.tech.system.agrotech.api.dto.response.AreaResponseDTO;
 import com.agro.tech.system.agrotech.domain.exception.area.AreaIdNaoInformadaException;
-import com.agro.tech.system.agrotech.domain.model.Area;
+import com.agro.tech.system.agrotech.domain.mapper.AreaMapper;
 import com.agro.tech.system.agrotech.domain.repository.AreaRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class ListarAreaUseCase {
 	
     public List<AreaResponseDTO> buscarTodos() {
         return areaRepository.buscarTodos().stream()
-            .map(this::mapToResponse)
+            .map(AreaMapper::mapToResponse)
             .collect(Collectors.toList());
     }
 
@@ -27,20 +27,8 @@ public class ListarAreaUseCase {
     	var area = areaRepository.buscarPorId(id)
     			.orElseThrow(() -> new AreaIdNaoInformadaException());
     	
-    	return mapToResponse(area);
+    	return AreaMapper.mapToResponse(area);
     }
         
-    private AreaResponseDTO mapToResponse(Area area) {
-    	
-    	return new AreaResponseDTO( 
-    			area.getId(),
-    			area.getNome(),
-    			area.getCodigo(),
-    			area.getLatitude(),
-    			area.getLongitude(),
-    			area.getStatus().getDescricao(),
-    			area.getCriadoEm(),
-    			area.getAtualizadoEm()
-    			);
-    }
+
 }
