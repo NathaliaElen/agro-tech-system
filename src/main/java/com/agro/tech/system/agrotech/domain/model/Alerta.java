@@ -21,13 +21,8 @@ public class Alerta {
 	private LocalDateTime criadoEm;
 	private LocalDateTime resolvidoEm;
 	private String resolvidoUsuarioId;
-/*
-	  `titulo` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-	  `mensagem` text COLLATE utf8mb4_unicode_ci NOT NULL,
-	  `gerado_em` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	  `resolvido_em` datetime DEFAULT NULL,
-	  `resolvido_por_usuario_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-	  */
+
+	
 	public Alerta(String id, String regraId, String leituraSensorId, Prioridade prioridade, String titulo, String mensagem, 
 			LocalDateTime criadoEm,LocalDateTime resolvidoEm, String resolvidoUsuarioId) {
 		

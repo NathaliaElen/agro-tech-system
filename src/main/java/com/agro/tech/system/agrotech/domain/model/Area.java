@@ -24,7 +24,6 @@ public class Area {
 	public Area(String id, String nome, String codigo, Double latitude, Double longitude, Status status,
 			LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
 		super();
-
 		
 		// Validar se o nome é nulo ou vazio
 		if (nome == null || nome.isBlank()) {
