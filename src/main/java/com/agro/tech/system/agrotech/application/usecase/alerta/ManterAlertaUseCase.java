@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.application.usecase.Alerta;
+package com.agro.tech.system.agrotech.application.usecase.alerta;
 
 import org.springframework.stereotype.Service;
 

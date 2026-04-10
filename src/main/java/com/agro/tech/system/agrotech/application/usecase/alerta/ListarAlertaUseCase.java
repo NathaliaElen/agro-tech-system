@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.application.usecase.Alerta;
+package com.agro.tech.system.agrotech.application.usecase.alerta;
 
 import java.util.List;
 import java.util.stream.Collectors;

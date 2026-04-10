@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.application.usecase.Area;
+package com.agro.tech.system.agrotech.application.usecase.area;
 
 import java.util.List;
 import java.util.stream.Collectors;

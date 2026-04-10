@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.application.usecase.Area;
+package com.agro.tech.system.agrotech.application.usecase.area;
 
 import java.time.LocalDateTime;
 

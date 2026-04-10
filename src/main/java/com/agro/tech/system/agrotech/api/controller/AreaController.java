@@ -10,9 +10,9 @@ import jakarta.validation.Valid;
 
 import com.agro.tech.system.agrotech.api.dto.request.AreaRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.AreaResponseDTO;
-import com.agro.tech.system.agrotech.application.usecase.Area.DeletarAreaUseCase;
-import com.agro.tech.system.agrotech.application.usecase.Area.ListarAreaUseCase;
-import com.agro.tech.system.agrotech.application.usecase.Area.ManterAreaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.area.DeletarAreaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.area.ListarAreaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.area.ManterAreaUseCase;
 
 
 @RestController

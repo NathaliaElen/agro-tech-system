@@ -1,7 +1,6 @@
 package com.agro.tech.system.agrotech.api.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agro.tech.system.agrotech.api.dto.request.AlertaRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.AlertaResponseDTO;
-import com.agro.tech.system.agrotech.application.usecase.Alerta.DeletarAlertaUseCase;
-import com.agro.tech.system.agrotech.application.usecase.Alerta.ListarAlertaUseCase;
-import com.agro.tech.system.agrotech.application.usecase.Alerta.ManterAlertaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.alerta.DeletarAlertaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.alerta.ListarAlertaUseCase;
+import com.agro.tech.system.agrotech.application.usecase.alerta.ManterAlertaUseCase;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

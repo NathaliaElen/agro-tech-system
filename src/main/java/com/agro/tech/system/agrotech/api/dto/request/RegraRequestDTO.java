@@ -2,9 +2,6 @@ package com.agro.tech.system.agrotech.api.dto.request;
 
 import java.time.LocalDateTime;
 
-import com.agro.tech.system.agrotech.domain.enums.Prioridade;
-import com.agro.tech.system.agrotech.domain.enums.Status;
-
 public record RegraRequestDTO(
 		String id,
 		String nome,
@@ -12,10 +9,10 @@ public record RegraRequestDTO(
 		String tipoSensorId,
 		Double limiteMin,
 		Double limiteMax,
-		Prioridade prioridade,
+		String prioridade,
 		String areaId,
 		String sensorId,
-		Status status,
+		String status,
 		LocalDateTime criadoEm,
 		LocalDateTime atualizadoEm		
 		) {}

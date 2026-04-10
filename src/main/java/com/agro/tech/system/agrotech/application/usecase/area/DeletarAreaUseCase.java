@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.application.usecase.Area;
+package com.agro.tech.system.agrotech.application.usecase.area;
 
 import org.springframework.stereotype.Service;
 import jakarta.validation.Valid;
