@@ -34,7 +34,6 @@ public class PerfilController {
     @PostMapping
     // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid PerfilRequestDTO perfilDto) {
-
         cadatrarPerfilUseCase.executar(perfilDto);
 
         // Retorna HTTP 201 (Created)
@@ -43,25 +42,40 @@ public class PerfilController {
 
     @GetMapping
     public ResponseEntity<List<PerfilResponseDTO>> listarTodos() {
-        var perfilResponse = listarTodosPerfilUseCase.listarTodos();
-        return ResponseEntity.ok(perfilResponse);
+        var perfilResponseDto = listarTodosPerfilUseCase.listarTodos();
+
+        if (perfilResponseDto == null) ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok(perfilResponseDto);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PerfilResponseDTO> buscarPorId(@PathVariable String id) {
+
         var perfilResponseDTO = buscarPerfilPorIdUseCase.buscarPorId(id);
+
+        if (perfilResponseDTO == null) ResponseEntity.noContent().build();
+
         return ResponseEntity.ok(perfilResponseDTO);
     }
 
     @GetMapping("/{nome}")
     public ResponseEntity<PerfilResponseDTO> buscarPorNome(@PathVariable String nome) {
         var perfilResponseDTO = buscarPerfilPorNomeUserCase.buscarPorNome(nome);
+
+        if (perfilResponseDTO == null) ResponseEntity.noContent().build();
+
         return ResponseEntity.ok(perfilResponseDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
+        var perfilResponseDTO = buscarPerfilPorNomeUserCase.buscarPorNome(id);
+
+        if (perfilResponseDTO == null) ResponseEntity.noContent().build();
+
         deletarPerfilUseCase.deletarPerfil(id);
-        return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok().build();
     }
 }

@@ -8,7 +8,7 @@ import com.agro.tech.system.agrotech.application.usecase.usuario.BuscarUsuarioPo
 import com.agro.tech.system.agrotech.application.usecase.usuario.CadastrarUsuarioUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuario.DeletarUsuarioUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuario.ListarTodosUsuariosUseCase;
-import com.agro.tech.system.agrotech.domain.exception.usuario.UsuarioNaoEncontradoException;
+import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -74,7 +74,7 @@ public class UsuarioController {
     @GetMapping("/{nome}")
     public ResponseEntity<UsuarioResponseDTO> buscarPorNome(@PathVariable String nome) {
         if (nome.isBlank()){
-            return ResponseEntity.notFound().build();
+            throw new NomeUsuarioNaoInformadoException();
         }
 
         var usuarioResponse =  buscarUsuarioPorNomeUseCase.buscarPorNome(nome);
@@ -89,10 +89,6 @@ public class UsuarioController {
 
     @GetMapping("/{email}")
     public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) {
-        if (email.isBlank()){
-            return ResponseEntity.notFound().build();
-        }
-
         var usuarioResponse =  buscarUsuarioPorEmailUseCase.buscarPorEmail(email);
 
         if (usuarioResponse == null) {
@@ -104,9 +100,10 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuarioPorId(@PathVariable String id) {
-        if (id.isBlank()){
-            throw new UsuarioNaoEncontradoException();
-        }
+
+        var usuario =  buscarUsuarioPorIdUsecase.buscarPorId(id);
+
+        if (usuario == null) ResponseEntity.notFound().build();
 
         deletarUsuarioUseCase.deletarUsuario(id);
 
