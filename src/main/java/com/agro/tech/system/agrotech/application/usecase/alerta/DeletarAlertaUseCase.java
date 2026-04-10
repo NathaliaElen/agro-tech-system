@@ -19,7 +19,9 @@ public class DeletarAlertaUseCase {
 	public void deletar(@Valid String id) {
 		alertaRepository.buscarPorId(id)
 			.orElseThrow(AlertaIdNaoinformadoException::new);
-		
+				
+		//VALIDAR SE EXISTE ALUMA REGRA ASSOCIADA A UM ALERTA
+		alertaRepository.deletar(id);
 	}
 
 }
