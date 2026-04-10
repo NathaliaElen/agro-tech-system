@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface JpaUsuarioPerfilRepository extends JpaRepository<UsuarioPerfilEntity, Long> {
-    Optional<UsuarioPerfilEntity> findByPerfil(String perfilId);
-    Optional<UsuarioPerfilEntity> findByUser(String usuarioId);
+    Optional<UsuarioPerfilEntity> findByPerfilId(String perfilId);
+    Optional<UsuarioPerfilEntity> findByUsuarioId(String usuarioId);
+    void deleteByPerfilId(String perfilId);
+    void deleteByUsuarioId(String usuarioId);
 }

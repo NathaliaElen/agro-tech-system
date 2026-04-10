@@ -37,17 +37,8 @@ public class UsuarioTest {
                 LocalDateTime.now(),
                 "system",
                 null,
-                null,
-                new UsuarioPerfil(
-                        1L,
-                        "1",
-                        "1",
-                        LocalDateTime.now(),
-                        "Nelson",
-                        null,
-                        null
+                null
 
-                )
         );
 
         assertTrue(usuario.isAdmin());
@@ -76,17 +67,8 @@ public class UsuarioTest {
                 LocalDateTime.now(),
                 "system",
                 null,
-                null,
-                new UsuarioPerfil(
-                        1L,
-                        "1",
-                        "1",
-                        LocalDateTime.now(),
-                        "Nelson",
-                        null,
-                        null
+                null
 
-                )
         );
 
         assertFalse(usuario.isAdmin());
@@ -105,7 +87,6 @@ public class UsuarioTest {
                 LocalDateTime.now(),
                 "system",
                 null,
-                null,
                 null
         ));
     }
@@ -123,7 +104,6 @@ public class UsuarioTest {
                 LocalDateTime.now(),
                 "system",
                 null,
-                null,
                 null
         ));
     }
@@ -140,7 +120,6 @@ public class UsuarioTest {
                 List.of(),
                 LocalDateTime.now(),
                 "system",
-                null,
                 null,
                 null
         ));

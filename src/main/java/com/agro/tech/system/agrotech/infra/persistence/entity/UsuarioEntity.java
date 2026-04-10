@@ -33,7 +33,7 @@ public class UsuarioEntity implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name= "senha_hash",nullable = false)
     private String senha;
 
     @Column(nullable = false)
@@ -48,39 +48,33 @@ public class UsuarioEntity implements UserDetails {
     )
     private List<PerfilEntity> perfis;
 
-    @Column(nullable = false)
+    @Column(name= "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
-    @Column(nullable = false)
+    @Column(name= "criado_por", nullable = false)
     private String criadoPor;
 
+    @Column(name= "atualizado_em")
     private LocalDateTime atualizadoEm;
 
+    @Column(name= "atualizado_por")
     private String atualizadoPor;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_perfil_id")
-    private UsuarioPerfilEntity usuarioPerfil;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (perfis == null) return Collections.emptyList();
 
-        PerfilEntity perfilEntity = perfis.stream()
-                .filter(p -> p.getId().equals(usuarioPerfil.getPerfilId()))
-                .findFirst()
-                .orElse(new PerfilEntity());
+        boolean isAdmin = perfis.stream()
+                .anyMatch(p -> p.getNome() != null && p.getNome().equalsIgnoreCase("ADMIN"));
 
-        boolean isAdmin = perfilEntity.getNome().equalsIgnoreCase("ADMIN");
         var listaPerfil = new ArrayList<SimpleGrantedAuthority>();
 
         if (isAdmin) {
             for (PerfilEntity p : perfis) {
             	listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + p.getNome().toUpperCase()));
-
             }
         } else {
-            listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + perfilEntity.getNome().toUpperCase()));
+            perfis.forEach(p -> listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + p.getNome().toUpperCase())));
         }
 
         return listaPerfil;

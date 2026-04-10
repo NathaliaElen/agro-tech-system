@@ -22,7 +22,7 @@ public class PerfilRepositoryAdapter implements PerfilRepository {
 
     @Override
     public Optional<Perfil> buscarPorNome(String nome) {
-        return jpa.findByName(nome).map(PerfilMapper::toDomain);
+        return jpa.findByNome(nome).map(PerfilMapper::toDomain);
     }
 
     @Override

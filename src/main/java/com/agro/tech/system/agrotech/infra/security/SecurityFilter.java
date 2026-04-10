@@ -25,7 +25,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             FilterChain filterChain) throws ServletException, IOException {
         String token = recuperarToken(request);
 
-        if (token == null) {
+        if (token != null) {
             String email = tokenService.getSubject(token);
 
             var usuario = jpaUsuarioRepository.findByEmail(email);

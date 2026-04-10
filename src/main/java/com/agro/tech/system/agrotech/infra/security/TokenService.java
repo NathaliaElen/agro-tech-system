@@ -26,10 +26,11 @@ public class TokenService {
                 .withIssuer("grupo-2-java-avanade")
                 .withSubject(usuario.getEmail())
                 .withClaim("role", usuario.getPerfis().stream()
-                        .filter(perfil -> perfil.getId().equals(usuario.getUsuarioPerfil().getPerfilId()))
+                        .filter(perfil -> "ADMIN".equalsIgnoreCase(perfil.getNome()))
+                        .findFirst()
+                        .or(() -> usuario.getPerfis().stream().findFirst())
                         .map(PerfilEntity::getNome)
                         .map(String::toUpperCase)
-                        .findFirst()
                         .orElse("USER"))
                 .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
                 .sign(algoritimo);

@@ -23,8 +23,7 @@ public class UsuarioMapper {
                 entity.getCriadoEm(),
                 entity.getCriadoPor(),
                 entity.getAtualizadoEm(),
-                entity.getAtualizadoPor(),
-                UsuarioPerfilMapper.toDomain(entity.getUsuarioPerfil())
+                entity.getAtualizadoPor()
         );
     }
 
@@ -39,8 +38,7 @@ public class UsuarioMapper {
                 usuario.getCriadoEm(),
                 usuario.getCriadoPor(),
                 usuario.getAtualizadoEm(),
-                usuario.getAtualizadoPor(),
-                toEntity(usuario.getUsuarioPerfil())
+                usuario.getAtualizadoPor()
         );
     }
 

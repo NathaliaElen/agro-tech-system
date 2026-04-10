@@ -17,7 +17,7 @@ public class CadastrarUsuarioUseCase {
     public void executar(UsuarioRequestDTO usuarioDto) {
         var existeLogin = usuarioRepository.existeLogin(usuarioDto.email());
 
-        if (!existeLogin) {
+        if (existeLogin) {
             throw new UsuarioExistenteException();
         }
 
