@@ -18,8 +18,8 @@ import org.springframework.validation.annotation.Validated;
 public class BuscarPerfilPorNomeUserCase {
     private final PerfilRepository perfilRepository;
 
-    public PerfilResponseDTO buscarPorEmail(String email){
-        return perfilRepository.buscarPorNome(email)
+    public PerfilResponseDTO buscarPorNome(String nome){
+        return perfilRepository.buscarPorNome(nome)
                 .map(PerfilDtoMapper::toResponseDto)
                 .orElseThrow(PerfilNaoEncontradoException::new);
     }

@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 public class BuscarPerfilPorIdUseCase {
     private final PerfilRepository perfilRepository;
 
-    public PerfilResponseDTO buscarPorEmail(String id){
+    public PerfilResponseDTO buscarPorId(String id){
         return perfilRepository.buscarPorNome(id)
                 .map(PerfilDtoMapper::toResponseDto)
                 .orElseThrow(PerfilNaoEncontradoException::new);
