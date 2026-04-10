@@ -11,15 +11,14 @@ import java.util.stream.Collectors;
 public class UsuarioDtoMapper {
     public static Usuario toModel(UsuarioRequestDTO usuarioRequestDTO) {
         return new Usuario(
-                usuarioRequestDTO.id(),
+                null,
                 usuarioRequestDTO.nome(),
                 usuarioRequestDTO.email(),
                 usuarioRequestDTO.senhaHash(),
                 usuarioRequestDTO.status(),
-                null,
+                List.of(),
                 usuarioRequestDTO.criadoEm(),
                 usuarioRequestDTO.criadoPor(),
-                null,
                 null,
                 null
         );

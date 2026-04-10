@@ -41,7 +41,7 @@ public class PerfilDtoMapper {
         );
     }
 
-    public static Perfil toModel(PerfilResponseDTO perfil){
+    public static Perfil toModel(PerfilRequestDTO perfil){
         return new Perfil(
                 perfil.id(),
                 perfil.nome(),

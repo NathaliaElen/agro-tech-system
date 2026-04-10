@@ -28,7 +28,6 @@ public class UsuarioPerfilMapper {
                 entity.getCriadoEm(),
                 entity.getCriadoPor(),
                 entity.getAtualizadoEm(),
-                entity.getAtualizadoPor()
-        );
+                entity.getAtualizadoPor());
     }
 }

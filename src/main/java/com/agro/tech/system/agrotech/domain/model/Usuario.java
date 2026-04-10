@@ -11,6 +11,7 @@ import com.agro.tech.system.agrotech.domain.exception.usuario.EmailUsuarioNaoInf
 import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInformadaException;
 import com.agro.tech.system.agrotech.domain.strategy.usuario.EmailValidator;
+import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioPerfilEntity;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -27,10 +28,9 @@ public class Usuario {
 	private LocalDateTime atualizadoEm;
 	private String criadoPor;
 	private String atualizadoPor;
-	private UsuarioPerfil usuarioPerfil;
 
-	public Usuario(String id, String nome, String email, String senhaHash, Status status,List<Perfil> perfis, LocalDateTime criadoEm,
-				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor, UsuarioPerfil usuarioPerfil) {
+	public Usuario(String id, String nome, String email, String senhaHash, Status status, List<Perfil> perfis, LocalDateTime criadoEm,
+				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor) {
 		super();
 
 		//perguntar se a ordem muda no java?
@@ -44,7 +44,10 @@ public class Usuario {
 		this.criadoPor = criadoPor;
 		this.atualizadoEm = atualizadoEm;
 		this.atualizadoPor = atualizadoPor;
-		this.usuarioPerfil = usuarioPerfil;
+
+		if (this.perfis == null) {
+			throw new ListaDePerfisNullException();
+		}
 
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
@@ -64,10 +67,6 @@ public class Usuario {
 		if (this.senhaHash == null || this.senhaHash.isBlank()) {
 			throw new SenhaUsuarioNaoInformadaException();
 		}
-
-		if (perfis == null || perfis.isEmpty()) {
-			throw new ListaDePerfisNullException();
-		}
 	}
 
 	public boolean isAdmin(){
@@ -76,4 +75,3 @@ public class Usuario {
 				.anyMatch(p -> p != null && "ADMIN".equalsIgnoreCase(p.getNome()));
 	}
 }
-

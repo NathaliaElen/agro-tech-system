@@ -1,16 +1,12 @@
 package com.agro.tech.system.agrotech.infra.persistence.entity;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,24 +14,31 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "usuarios_perfil")
+@Table(name = "usuario_perfil")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UsuarioPerfilEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @Column(name = "usuario_id")
     private String usuarioId;
+
+    @Column(name = "perfil_id")
     private String perfilId;
 
-    @Column(nullable = false)
+    @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
-    @Column(nullable = false)
+    @Column(name = "criado_por",nullable = false)
     private String criadoPor;
 
+    @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
+
+    @Column(name = "atualizado_por")
     private String atualizadoPor;
 }

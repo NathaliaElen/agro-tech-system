@@ -2,12 +2,19 @@ package com.agro.tech.system.agrotech.api.controller;
 
 import com.agro.tech.system.agrotech.api.dto.request.UsuarioRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.UsuarioResponseDTO;
+import com.agro.tech.system.agrotech.application.usecase.usuario.BuscarUsuarioPorEmailUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuario.BuscarUsuarioPorIdUseCase;
+import com.agro.tech.system.agrotech.application.usecase.usuario.BuscarUsuarioPorNomeUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuario.CadastrarUsuarioUseCase;
+import com.agro.tech.system.agrotech.application.usecase.usuario.DeletarUsuarioUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuario.ListarTodosUsuariosUseCase;
+import com.agro.tech.system.agrotech.domain.exception.usuario.UsuarioNaoEncontradoException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +31,9 @@ public class UsuarioController {
     private final CadastrarUsuarioUseCase cadatrarUsuarioUseCase;
     private final ListarTodosUsuariosUseCase listarTodosUsuariosUseCase;
     private final BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUsecase;
+    private final BuscarUsuarioPorNomeUseCase buscarUsuarioPorNomeUseCase;
+    private final BuscarUsuarioPorEmailUseCase buscarUsuarioPorEmailUseCase;
+    private final DeletarUsuarioUseCase deletarUsuarioUseCase;
 
     @PostMapping
     // @PreAuthorize("hasRole('ADMIN')")
@@ -35,6 +45,7 @@ public class UsuarioController {
         return ResponseEntity.status(201).build();
     }
 
+    @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
         var usuarioResponse =  listarTodosUsuariosUseCase.listarTodos();
 
@@ -45,7 +56,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioResponse);
     }
 
-    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@Valid String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
@@ -59,4 +71,45 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioResponse);
     }
 
+    @GetMapping("/{nome}")
+    public ResponseEntity<UsuarioResponseDTO> buscarPorNome(@PathVariable String nome) {
+        if (nome.isBlank()){
+            return ResponseEntity.notFound().build();
+        }
+
+        var usuarioResponse =  buscarUsuarioPorNomeUseCase.buscarPorNome(nome);
+
+        if (usuarioResponse == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(usuarioResponse);
+
+    }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) {
+        if (email.isBlank()){
+            return ResponseEntity.notFound().build();
+        }
+
+        var usuarioResponse =  buscarUsuarioPorEmailUseCase.buscarPorEmail(email);
+
+        if (usuarioResponse == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(usuarioResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUsuarioPorId(@PathVariable String id) {
+        if (id.isBlank()){
+            throw new UsuarioNaoEncontradoException();
+        }
+
+        deletarUsuarioUseCase.deletarUsuario(id);
+
+        return ResponseEntity.ok().build();
+    }
 }

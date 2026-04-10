@@ -18,7 +18,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "perfis")
+@Table(name = "perfil")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,22 +26,25 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 public class PerfilEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     private Status status;
 
-    @Column(nullable = false)
+    @Column(name = "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
-    @Column(nullable = false)
+    @Column(name = "criado_por", nullable = false)
     private String criadoPor;
 
+    @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
+
+    @Column(name = "atualizado_por")
     private String atualizadoPor;
 }
