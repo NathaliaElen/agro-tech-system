@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.infra.persistence.entity.SensorEntity;
 
 public interface JpaSensorRepository extends JpaRepository<SensorEntity, String> {
@@ -13,5 +12,5 @@ public interface JpaSensorRepository extends JpaRepository<SensorEntity, String>
 
     List<SensorEntity> findByAreaId(String areaId);
 
-    List<SensorEntity> findByStatus(Status status);	
+    List<SensorEntity> findByStatus(String status);	
 }

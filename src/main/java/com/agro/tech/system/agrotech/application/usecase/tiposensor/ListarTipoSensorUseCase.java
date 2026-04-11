@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.agro.tech.system.agrotech.api.dto.response.TipoSensorResponseDTO;
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.exception.tiposensor.TipoSensorIdNaoEcontradoException;
 import com.agro.tech.system.agrotech.domain.exception.tiposensor.NomeTipoSensorNaoEncontradoException;
 import com.agro.tech.system.agrotech.domain.mapper.TipoSensorMapper;
@@ -40,7 +39,7 @@ public class ListarTipoSensorUseCase {
 	}
 
 	public List<TipoSensorResponseDTO> buscarPorStatus(String status) {
-		return tipoSensorRepository.buscarPorStatus(Status.fromDescricao(status)).stream()
+		return tipoSensorRepository.buscarPorStatus(status).stream()
 				.map(TipoSensorMapper::toResponseDto)
 				.collect(Collectors.toList());
 	}

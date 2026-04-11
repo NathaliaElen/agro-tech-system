@@ -49,7 +49,7 @@ public class SensorRepositoryAdapter implements SensorRepository {
 	}
 
 	@Override
-	public List<Sensor> buscarPorStatus(Status status) {
+	public List<Sensor> buscarPorStatus(String status) {
 		return jpa.findByStatus(status).stream()
 				.map(SensorMapper::toDomain)
 				.collect(Collectors.toList());

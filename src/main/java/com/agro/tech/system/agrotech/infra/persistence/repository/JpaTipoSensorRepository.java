@@ -5,11 +5,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.infra.persistence.entity.TipoSensorEntity;
 
 public interface JpaTipoSensorRepository extends JpaRepository<TipoSensorEntity, String> {
 	Optional<TipoSensorEntity> findByNome(String nome);
 	
-	List<TipoSensorEntity> findByStatus(Status status);
+	List<TipoSensorEntity> findByStatus(String status);
 }
