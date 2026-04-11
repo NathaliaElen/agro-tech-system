@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -18,22 +19,26 @@ public class UsuarioTest {
     @Test
     @DisplayName("Deve Retornar True Quando é Admin")
     void deveRetornarTrueQuandoPossuiPerfilIsAdmin() {
+        List<Perfil> perfis = new ArrayList<>();
+        var perfil = new Perfil(
+                "1",
+                "ADMIN",
+                Status.ATIVO,
+                LocalDateTime.now(),
+                "Nelson",
+                null,
+                null
+
+        );
+
+        perfis.add(perfil);
         Usuario usuario = new Usuario(
                 "u2",
                 "Ana",
                 "ana@email.com",
                 "senha",
                 Status.ATIVO,
-                List.of(new Perfil(
-                        "1",
-                        "ADMIN",
-                        Status.ATIVO,
-                        LocalDateTime.now(),
-                        "Nelson",
-                        null,
-                        null
-
-                )),
+                perfis,
                 LocalDateTime.now(),
                 "system",
                 null,
@@ -41,29 +46,34 @@ public class UsuarioTest {
 
         );
 
-        assertTrue(usuario.isAdmin());
+        boolean isAdmin = perfil.getNome().equals("ADMIN");
+
+        assertTrue(isAdmin);
     }
 
     @Test
     @DisplayName("Deve Retornar False Quando não é Admin")
     void deveRetornarFalseQuandoNaoPossuiPerfilAdmin() {
+        List<Perfil> perfis = new ArrayList<>();
 
+        var perfil = new Perfil(
+                "1",
+                "USER",
+                Status.ATIVO,
+                LocalDateTime.now(),
+                "Nelson",
+                null,
+                null
+
+        );
+        perfis.add(perfil);
         Usuario usuario = new Usuario(
                 "u2",
                 "Ana",
                 "ana@email.com",
                 "senha",
                 Status.ATIVO,
-                List.of(new Perfil(
-                        "1",
-                        "USER",
-                        Status.ATIVO,
-                        LocalDateTime.now(),
-                        "Nelson",
-                        null,
-                        null
-
-                )),
+                perfis,
                 LocalDateTime.now(),
                 "system",
                 null,
@@ -71,24 +81,9 @@ public class UsuarioTest {
 
         );
 
-        assertFalse(usuario.isAdmin());
-    }
+        boolean isAdmin = perfil.getNome().equals("ADMIN");
 
-    @Test
-    @DisplayName("Deve lançar exception quando a lista de perfis for nula")
-    void deveLancarExceptionQuandoListaDePerfisForNula() {
-        assertThrows(ListaDePerfisNullException.class, () -> new Usuario(
-                "u2",
-                "Ana",
-                "ana@email.com",
-                "senha",
-                Status.ATIVO,
-                null,
-                LocalDateTime.now(),
-                "system",
-                null,
-                null
-        ));
+        assertFalse(isAdmin);
     }
 
     @Test

@@ -15,7 +15,7 @@ import java.util.List;
 public class ListarTodosPerfilUseCase {
     private final PerfilRepository perfilRepository;
 
-    public List<PerfilResponseDTO> listarTodos(){
+    public List<PerfilResponseDTO> executar(){
         return PerfilDtoMapper.toListDto(perfilRepository.ListarTodos());
     }
 }

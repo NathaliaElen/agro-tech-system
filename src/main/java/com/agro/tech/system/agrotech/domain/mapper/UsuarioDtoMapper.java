@@ -9,32 +9,31 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UsuarioDtoMapper {
-    public static Usuario toModel(UsuarioRequestDTO usuarioRequestDTO) {
+    public static Usuario toModel(UsuarioResponseDTO usuarioResponseDTO) {
         return new Usuario(
+                usuarioResponseDTO.id(),
+                usuarioResponseDTO.nome(),
+                usuarioResponseDTO.email(),
                 null,
-                usuarioRequestDTO.nome(),
-                usuarioRequestDTO.email(),
-                usuarioRequestDTO.senhaHash(),
-                usuarioRequestDTO.status(),
-                List.of(),
-                usuarioRequestDTO.criadoEm(),
-                usuarioRequestDTO.criadoPor(),
+                usuarioResponseDTO.status(),
+                null,
+                null,
+                null,
                 null,
                 null
         );
     }
 
-    public static UsuarioRequestDTO toRequestDto(Usuario usuario) {
-        return new UsuarioRequestDTO(
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuario.getSenhaHash(),
-                usuario.getStatus(),
-                usuario.getCriadoEm(),
-                usuario.getCriadoPor(),
-                null,
-                null
+   /* String id, String nome, String email, String senhaHash, Status status, List<Perfil> perfis, LocalDateTime criadoEm,
+    String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor*/
+
+
+    public static UsuarioResponseDTO toResponseDto(UsuarioRequestDTO usuarioDto) {
+        return new UsuarioResponseDTO(
+                usuarioDto.id(),
+                usuarioDto.nome(),
+                usuarioDto.email(),
+                usuarioDto.status()
         );
     }
 
@@ -43,9 +42,7 @@ public class UsuarioDtoMapper {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getStatus(),
-                usuario.getCriadoEm(),
-                usuario.getCriadoPor()
+                usuario.getStatus()
         );
     }
 

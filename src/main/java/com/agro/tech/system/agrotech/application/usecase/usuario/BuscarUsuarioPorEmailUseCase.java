@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 public class BuscarUsuarioPorEmailUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioResponseDTO buscarPorEmail(String email){
+    public UsuarioResponseDTO executar(String email){
         return usuarioRepository.buscarPorEmail(email)
                 .map(UsuarioDtoMapper::toResponseDto)
                 .orElseThrow(UsuarioNaoEncontradoException::new);

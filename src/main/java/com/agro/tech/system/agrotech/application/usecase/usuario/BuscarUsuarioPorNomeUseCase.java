@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 public class BuscarUsuarioPorNomeUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioResponseDTO buscarPorNome(String nome){
+    public UsuarioResponseDTO executar(String nome){
         return usuarioRepository.buscarPorNome(nome)
                 .map(UsuarioDtoMapper::toResponseDto)
                 .orElseThrow(UsuarioNaoEncontradoException::new);

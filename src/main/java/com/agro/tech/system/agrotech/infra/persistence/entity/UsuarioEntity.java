@@ -48,6 +48,8 @@ public class UsuarioEntity implements UserDetails {
     )
     private List<PerfilEntity> perfis;
 
+    String perfil;
+
     @Column(name= "criado_em", nullable = false)
     private LocalDateTime criadoEm;
 
@@ -64,8 +66,7 @@ public class UsuarioEntity implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (perfis == null) return Collections.emptyList();
 
-        boolean isAdmin = perfis.stream()
-                .anyMatch(p -> p.getNome() != null && p.getNome().equalsIgnoreCase("ADMIN"));
+        boolean isAdmin = this.perfil.equalsIgnoreCase("ADMIN");
 
         var listaPerfil = new ArrayList<SimpleGrantedAuthority>();
 

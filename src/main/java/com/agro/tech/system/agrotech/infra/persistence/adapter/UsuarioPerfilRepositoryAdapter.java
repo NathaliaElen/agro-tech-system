@@ -16,12 +16,12 @@ public class UsuarioPerfilRepositoryAdapter implements UsuarioPerfilRepository {
     private final JpaUsuarioPerfilRepository jpa;
 
     @Override
-    public Optional<UsuarioPerfil> buscarPorPerfil(String perfilId) {
+    public Optional<UsuarioPerfil> buscarPorPerfilId(String perfilId) {
         return jpa.findByPerfilId(perfilId).map(UsuarioPerfilMapper::toDomain);
     }
 
     @Override
-    public Optional<UsuarioPerfil> buscarPorUsuario(String usuarioId) {
+    public Optional<UsuarioPerfil> buscarPorUsuarioId(String usuarioId) {
         return jpa.findByUsuarioId(usuarioId).map(UsuarioPerfilMapper::toDomain);
     }
 
@@ -35,11 +35,11 @@ public class UsuarioPerfilRepositoryAdapter implements UsuarioPerfilRepository {
         jpa.save(UsuarioPerfilMapper.toEntity(usuarioPerfil));
     }
 
-    public void deletaByPerfilId(String id) {
+    public void deletarPorPerfilId(String id) {
         jpa.deleteByPerfilId(id);
     }
 
-    public void deletarPorUsuario(String idUsuario) {
+    public void deletarPorUsuarioId(String idUsuario) {
         jpa.findByUsuarioId(idUsuario).ifPresent(entity -> jpa.deleteByUsuarioId(entity.getId()));
     }
 

@@ -11,6 +11,7 @@ import com.agro.tech.system.agrotech.application.usecase.usuario.ListarTodosUsua
 import com.agro.tech.system.agrotech.domain.exception.usuario.NomeUsuarioNaoInformadoException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
-        var usuarioResponse =  listarTodosUsuariosUseCase.listarTodos();
+        var usuarioResponse =  listarTodosUsuariosUseCase.executar();
 
         if (usuarioResponse == null) {
             return ResponseEntity.notFound().build();
@@ -62,7 +63,7 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioResponse =  buscarUsuarioPorIdUsecase.buscarPorId(id);
+        var usuarioResponse =  buscarUsuarioPorIdUsecase.executar(id);
 
         if (usuarioResponse == null) {
             return ResponseEntity.notFound().build();
@@ -77,7 +78,7 @@ public class UsuarioController {
             throw new NomeUsuarioNaoInformadoException();
         }
 
-        var usuarioResponse =  buscarUsuarioPorNomeUseCase.buscarPorNome(nome);
+        var usuarioResponse =  buscarUsuarioPorNomeUseCase.executar(nome);
 
         if (usuarioResponse == null) {
             return ResponseEntity.notFound().build();
@@ -89,7 +90,7 @@ public class UsuarioController {
 
     @GetMapping("/{email}")
     public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) {
-        var usuarioResponse =  buscarUsuarioPorEmailUseCase.buscarPorEmail(email);
+        var usuarioResponse =  buscarUsuarioPorEmailUseCase.executar(email);
 
         if (usuarioResponse == null) {
             return ResponseEntity.notFound().build();
@@ -101,11 +102,11 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuarioPorId(@PathVariable String id) {
 
-        var usuario =  buscarUsuarioPorIdUsecase.buscarPorId(id);
+        var usuario =  buscarUsuarioPorIdUsecase.executar(id);
 
         if (usuario == null) ResponseEntity.notFound().build();
 
-        deletarUsuarioUseCase.deletarUsuario(id);
+        deletarUsuarioUseCase.executar(id);
 
         return ResponseEntity.ok().build();
     }

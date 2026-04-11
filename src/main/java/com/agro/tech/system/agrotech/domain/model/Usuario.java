@@ -13,9 +13,11 @@ import com.agro.tech.system.agrotech.domain.exception.usuario.SenhaUsuarioNaoInf
 import com.agro.tech.system.agrotech.domain.strategy.usuario.EmailValidator;
 import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioPerfilEntity;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
 @ToString(exclude = "senhaHash")
 public class Usuario {
 	private String id;
@@ -45,9 +47,6 @@ public class Usuario {
 		this.atualizadoEm = atualizadoEm;
 		this.atualizadoPor = atualizadoPor;
 
-		if (this.perfis == null) {
-			throw new ListaDePerfisNullException();
-		}
 
 		// Validar se o nome é nulo ou vazio
 		if (this.nome == null || this.nome.isBlank()) {
@@ -67,11 +66,5 @@ public class Usuario {
 		if (this.senhaHash == null || this.senhaHash.isBlank()) {
 			throw new SenhaUsuarioNaoInformadaException();
 		}
-	}
-
-	public boolean isAdmin(){
-		return this.perfis != null
-				&& this.perfis.stream()
-				.anyMatch(p -> p != null && "ADMIN".equalsIgnoreCase(p.getNome()));
 	}
 }

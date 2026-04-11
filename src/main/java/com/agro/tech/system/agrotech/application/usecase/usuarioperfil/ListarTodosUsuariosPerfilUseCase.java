@@ -1,20 +1,21 @@
 package com.agro.tech.system.agrotech.application.usecase.usuarioperfil;
 
-import com.agro.tech.system.agrotech.api.dto.request.UsuarioPerfilRequestDTO;
+import com.agro.tech.system.agrotech.api.dto.response.UsuarioPerfilResponseDTO;
 import com.agro.tech.system.agrotech.domain.mapper.UsuarioPerfilDtoMapper;
 import com.agro.tech.system.agrotech.domain.repository.UsuarioPerfilRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Service
 @Validated
 @RequiredArgsConstructor
-public class CadastrarUsuarioPerfilUseCase {
+public class ListarTodosUsuariosPerfilUseCase {
     private final UsuarioPerfilRepository usuarioPerfilRepository;
 
-    public void executar(UsuarioPerfilRequestDTO usuarioPerfilDTO) {
-
-        usuarioPerfilRepository.salvar(UsuarioPerfilDtoMapper.toModel(usuarioPerfilDTO));
+    public List<UsuarioPerfilResponseDTO> executar(){
+        return UsuarioPerfilDtoMapper.toListDto(usuarioPerfilRepository.listarTodos());
     }
 }
