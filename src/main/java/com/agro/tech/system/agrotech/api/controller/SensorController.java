@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agro.tech.system.agrotech.api.dto.request.AlertaRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.request.SensorRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.SensorResponseDTO;
 import com.agro.tech.system.agrotech.application.usecase.sensor.DeletarSensorUseCase;
@@ -41,7 +40,7 @@ public class SensorController {
   @DeleteMapping("/{id}")
   @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deletar(@PathVariable String id) {
-    deletarSensorUseCase.deletar(id);
+    deletarSensorUseCase.deletarSensor(id);
     return ResponseEntity.noContent().build();
   }
 

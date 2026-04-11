@@ -19,7 +19,7 @@ public class DeletarSensorUseCase {
   private final SensorRepository sensorRepository;
   private final ListarRegraUseCase listarRegraUseCase;
 
-  public void deletar(String id) {
+  public void deletarSensor(String id) {
     sensorRepository.buscarPorId(id)
         .orElseThrow(SensorIdNaoEncontradoException::new);  
 
