@@ -25,13 +25,12 @@ public class Usuario {
 	private String email;
 	private String senhaHash;
 	private Status status;
-	private List<Perfil> perfis;
 	private LocalDateTime criadoEm;
 	private LocalDateTime atualizadoEm;
 	private String criadoPor;
 	private String atualizadoPor;
 
-	public Usuario(String id, String nome, String email, String senhaHash, Status status, List<Perfil> perfis, LocalDateTime criadoEm,
+	public Usuario(String id, String nome, String email, String senhaHash, Status status, LocalDateTime criadoEm,
 				   String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor) {
 		super();
 
@@ -41,7 +40,6 @@ public class Usuario {
 		this.email = email;
 		this.senhaHash = senhaHash;
 		this.status = status;
-		this.perfis = perfis;
 		this.criadoEm = criadoEm;
 		this.criadoPor = criadoPor;
 		this.atualizadoEm = atualizadoEm;

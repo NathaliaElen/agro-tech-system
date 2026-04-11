@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
 public class UsuarioDtoMapper {
     public static Usuario toModel(UsuarioResponseDTO usuarioResponseDTO) {
         return new Usuario(
-                usuarioResponseDTO.id(),
+                null,
                 usuarioResponseDTO.nome(),
                 usuarioResponseDTO.email(),
-                null,
+                usuarioResponseDTO.senha(),
                 usuarioResponseDTO.status(),
-                null,
                 null,
                 null,
                 null,
@@ -24,15 +23,27 @@ public class UsuarioDtoMapper {
         );
     }
 
-   /* String id, String nome, String email, String senhaHash, Status status, List<Perfil> perfis, LocalDateTime criadoEm,
-    String criadoPor, LocalDateTime atualizadoEm, String atualizadoPor*/
-
+    // Novo: mapeia direto do request DTO para o modelo de domínio
+    public static Usuario toModel(UsuarioRequestDTO usuarioDto) {
+        return new Usuario(
+                usuarioDto.id(),
+                usuarioDto.nome(),
+                usuarioDto.email(),
+                usuarioDto.senhaHash(),
+                usuarioDto.status(),
+                null,
+                null,
+                null,
+                null
+        );
+    }
 
     public static UsuarioResponseDTO toResponseDto(UsuarioRequestDTO usuarioDto) {
         return new UsuarioResponseDTO(
                 usuarioDto.id(),
                 usuarioDto.nome(),
                 usuarioDto.email(),
+                usuarioDto.senhaHash(),
                 usuarioDto.status()
         );
     }
@@ -42,6 +53,7 @@ public class UsuarioDtoMapper {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
+                usuario.getSenhaHash(),
                 usuario.getStatus()
         );
     }

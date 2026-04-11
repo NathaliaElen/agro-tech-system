@@ -8,5 +8,6 @@ public record UsuarioResponseDTO (
             String id,
             String nome,
             String email,
+            String senha,
             Status status
         ){ }

@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.infra.security;
 
+import com.agro.tech.system.agrotech.infra.persistence.entity.LoginEntity;
 import com.agro.tech.system.agrotech.infra.persistence.entity.PerfilEntity;
 import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioEntity;
 import com.auth0.jwt.JWT;
@@ -15,20 +16,20 @@ import java.util.Date;
 
 @Service
 public class TokenService {
-    //chave secreta do jwt(posteriormente vamos definir sua origem no arquivo "application.properties")
+    //chave secreta do jwt(posteriormente vamos definir sua origem no arquivo "application.yml")
     @Value("${api.security.secret}")
     private String secret;
 
-    public String gerarToken(UsuarioEntity usuario){
+    public String gerarToken(LoginEntity loginEntity){
         Algorithm algoritimo = Algorithm.HMAC256(secret);
 
         return JWT.create()
                 .withIssuer("grupo-2-java-avanade")
-                .withSubject(usuario.getEmail())
-                .withClaim("role", usuario.getPerfis().stream()
+                .withSubject(loginEntity.getUsername())
+                .withClaim("role", loginEntity.getPerfis().stream()
                         .filter(perfil -> "ADMIN".equalsIgnoreCase(perfil.getNome()))
                         .findFirst()
-                        .or(() -> usuario.getPerfis().stream().findFirst())
+                        .or(() -> loginEntity.getPerfis().stream().findFirst())
                         .map(PerfilEntity::getNome)
                         .map(String::toUpperCase)
                         .orElse("USER"))

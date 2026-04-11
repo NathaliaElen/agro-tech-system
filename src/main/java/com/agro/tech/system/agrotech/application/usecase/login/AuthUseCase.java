@@ -9,6 +9,7 @@ import com.agro.tech.system.agrotech.domain.model.Perfil;
 import com.agro.tech.system.agrotech.domain.repository.PerfilRepository;
 import com.agro.tech.system.agrotech.domain.repository.UsuarioPerfilRepository;
 import com.agro.tech.system.agrotech.domain.repository.UsuarioRepository;
+import com.agro.tech.system.agrotech.infra.persistence.entity.LoginEntity;
 import com.agro.tech.system.agrotech.infra.persistence.mapper.PerfilMapper;
 import com.agro.tech.system.agrotech.infra.persistence.mapper.UsuarioMapper;
 import com.agro.tech.system.agrotech.infra.persistence.repository.JpaUsuarioRepository;
@@ -35,7 +36,7 @@ public class AuthUseCase {
     public LoginResponseDTO executar(LoginRequestDto loginRequestDto) {
         var authToken = new UsernamePasswordAuthenticationToken(loginRequestDto.email(), loginRequestDto.senha());
 
-        authenticationManager.authenticate(authToken);
+        var authentication = authenticationManager.authenticate(authToken);
 
         UsuarioResponseDTO usuarioDto = usuarioRepository.buscarPorEmail(loginRequestDto.email())
                     .map(UsuarioDtoMapper::toResponseDto)
@@ -56,10 +57,11 @@ public class AuthUseCase {
 
         var usuarioEntity = UsuarioMapper.toEntity(usuario);
 
-        usuarioEntity.setPerfis(PerfilMapper.toEntityPerfis(perfis));
-        usuarioEntity.setPerfil(perfil);
+        var loginEntity = new LoginEntity(usuarioEntity.getNome(), loginRequestDto.email(), loginRequestDto.senha(), null, null);
+        loginEntity.setPerfis(PerfilMapper.toEntityPerfis(perfis));
+        loginEntity.setPerfil(perfil);
 
-        var token = tokenService.gerarToken(usuarioEntity);
+        var token = tokenService.gerarToken(loginEntity);
 
         return new LoginResponseDTO(
             token
