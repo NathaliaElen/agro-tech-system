@@ -3,7 +3,6 @@ package com.agro.tech.system.agrotech.domain.repository;
 import java.util.List;
 import java.util.Optional;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.Sensor;
 
 public interface SensorRepository {
@@ -17,7 +16,7 @@ public interface SensorRepository {
 
     List<Sensor> buscarPorAreaId(String areaId);
     
-    List<Sensor> buscarPorStatus(Status status);
+    List<Sensor> buscarPorStatus(String status);
 
     void deletar(String id);
 }

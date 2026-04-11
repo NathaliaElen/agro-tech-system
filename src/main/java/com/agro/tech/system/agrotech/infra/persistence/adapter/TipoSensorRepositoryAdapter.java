@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.TipoSensor;
 import com.agro.tech.system.agrotech.domain.repository.TipoSensorRepository;
 import com.agro.tech.system.agrotech.infra.persistence.mapper.TipoSensorMapper;
@@ -42,7 +41,7 @@ public class TipoSensorRepositoryAdapter implements TipoSensorRepository {
 	}
 
 	@Override
-	public List<TipoSensor> buscarPorStatus(Status status) {
+	public List<TipoSensor> buscarPorStatus(String status) {
 		return jpa.findByStatus(status).stream()
 				.map(TipoSensorMapper::toDomain)
 				.collect(Collectors.toList());
