@@ -36,7 +36,7 @@ public class TipoSensorEntity {
 	@Column(nullable = true, length = 255, name = "descricao")
 	private String descricao;
 	
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	@Column(nullable = false, name = "status")
 	private String status;
 }

@@ -12,5 +12,7 @@ public interface JpaSensorRepository extends JpaRepository<SensorEntity, String>
 
     List<SensorEntity> findByAreaId(String areaId);
 
-    List<SensorEntity> findByStatus(String status);	
+    List<SensorEntity> findByStatus(String status);
+
+    List<SensorEntity> findByTipoSensorId(String tipoSensorId);	
 }

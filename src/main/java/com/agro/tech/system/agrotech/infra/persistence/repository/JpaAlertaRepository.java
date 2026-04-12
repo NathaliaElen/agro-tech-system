@@ -7,11 +7,7 @@ import com.agro.tech.system.agrotech.infra.persistence.entity.AlertaEntity;
 
 public interface JpaAlertaRepository extends JpaRepository<AlertaEntity,String>{
 
-	List<AlertaEntity> findByTipoSensorId(String tipoSensorId);
+	List<AlertaEntity> findByPrioridade(String prioridade);
 
-    List<AlertaEntity> findBySensorId(String sensorId);
-
-    List<AlertaEntity> findByPrioridade(String prioridade);
-
-    List<AlertaEntity> findByAreaId(String areaId);
+    List<AlertaEntity> findByLeituraSensorIdIn(List<String> leituraSensorIds);
 }
