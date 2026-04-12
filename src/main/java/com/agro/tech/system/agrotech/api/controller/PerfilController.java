@@ -53,7 +53,7 @@ public class PerfilController {
     }
 
     @GetMapping("/id/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<PerfilResponseDTO> buscarPorId(@PathVariable String id) {
 
         var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
@@ -76,7 +76,7 @@ public class PerfilController {
     @DeleteMapping("/{id}")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
-        var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(id);
+        var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
 
         if (perfilResponseDTO == null) ResponseEntity.noContent().build();
 
