@@ -48,8 +48,9 @@ public class PerfilDtoMapper {
     }
 
     public static Perfil toModel(PerfilRequestDTO perfil){
+        String id = (perfil.id() == null || perfil.id().isBlank()) ? null : perfil.id();
         return new Perfil(
-                perfil.id(),
+                id,
                 perfil.nome(),
                 perfil.status(),
                 perfil.criadoEm(),

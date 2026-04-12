@@ -16,8 +16,9 @@ public class ManterTipoSensorUseCase {
   private final TipoSensorRepository tipoSensorRepository;
 
   public TipoSensor salvarTipoSensor(TipoSensorRequestDTO tipoSensorRequestDto) {
+    String id = (tipoSensorRequestDto.id() == null || tipoSensorRequestDto.id().isBlank()) ? null : tipoSensorRequestDto.id();
     TipoSensor tipoSensor = new TipoSensor(
-        tipoSensorRequestDto.id(),
+        id,
         tipoSensorRequestDto.nome(),
         tipoSensorRequestDto.unidadeMedida(),
         tipoSensorRequestDto.descricao(),

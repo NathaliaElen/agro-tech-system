@@ -45,31 +45,37 @@ public class AlertaController {
     }	
     
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscartodos() {
         return ResponseEntity.ok(listarAlertaUseCase.buscarTodos());
     }
     
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<AlertaResponseDTO> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorId(id));
     }
 
     @GetMapping("/buscarportiposensor/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorTipoSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorTipoSensorId(id));
     }  
 
     @GetMapping("/buscarporsensor/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorSensorId(id));
     }  
     
     @GetMapping("/buscarporprioridade/{prioridade}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorPrioridade(@PathVariable String prioridade) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorPrioridade(prioridade));
     }  
       
     @GetMapping("/buscarporarea/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorAreaId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorAreaId(id));
     }      

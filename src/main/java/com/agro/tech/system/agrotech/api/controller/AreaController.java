@@ -40,11 +40,13 @@ public class AreaController {
     }	
         
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AreaResponseDTO>> buscartodos() {
         return ResponseEntity.ok(listarAreaUseCase.buscarTodos());
     }	 
     
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")    
     public ResponseEntity<AreaResponseDTO> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAreaUseCase.buscarPorId(id));
     }
