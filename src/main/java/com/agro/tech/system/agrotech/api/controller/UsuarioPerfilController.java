@@ -51,13 +51,13 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/{usuarioId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String usuarioId) {
-        if (usuarioId.isBlank()){
+    @GetMapping("/buscar-usuario/{id}")
+    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(usuarioId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
@@ -66,13 +66,13 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/{perfilId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String perfilId) {
-        if (perfilId.isBlank()){
+    @GetMapping("/buscar-perfil/{id}")
+    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(perfilId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
@@ -81,36 +81,36 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/{usuarioId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String usuarioId) {
-        if (usuarioId.isBlank()){
+    @DeleteMapping("/delete-usuario/{id}")
+    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(usuarioId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
         }
 
-        deletarUsuarioPerfilPorUsuarioId.executar(usuarioId);
+        deletarUsuarioPerfilPorUsuarioId.executar(id);
 
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/{perfilId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String perfilId) {
-        if (perfilId.isBlank()){
+    @DeleteMapping("/delete-perfil/{id}")
+    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(perfilId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
         }
 
-        deletarUsuarioPerfilPorUsuarioId.executar(perfilId);
+        deletarUsuarioPerfilPorUsuarioId.executar(id);
 
         return ResponseEntity.ok(usuarioPerfilResponse);
     }

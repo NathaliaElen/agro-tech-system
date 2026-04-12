@@ -46,12 +46,21 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
+                        .requestMatchers("/error").permitAll()
+
                         .requestMatchers("/h2-console/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/usuarios/**").permitAll()
                         .requestMatchers("/usuarios-perfil/**").permitAll()
                         .requestMatchers("/perfis/**").permitAll()
+                        .requestMatchers("/alertas/**").permitAll()
+                        .requestMatchers("/areas/**").permitAll()
+                        .requestMatchers("/leituras-sensores/**").permitAll()
+                        .requestMatchers("/regras/**").permitAll()
+                        .requestMatchers("/sensores/**").permitAll()
+                        .requestMatchers("/tipos-sensores/**").permitAll()
+                        
                         .anyRequest().authenticated()
                 )
                 // 3. Importante: O H2 usa frames. O Spring bloqueia por padrão.
@@ -66,11 +75,9 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        //configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        //configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
-        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Accept"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
