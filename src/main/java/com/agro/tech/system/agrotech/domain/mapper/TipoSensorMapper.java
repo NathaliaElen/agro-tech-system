@@ -16,8 +16,12 @@ public class TipoSensorMapper {
         ? Status.valueOf(tipoSensorRequestDTO.status().toUpperCase())
         : Status.ATIVO; // Status padrão
 
+    String id = (tipoSensorRequestDTO.id() == null || tipoSensorRequestDTO.id().isBlank())
+        ? null
+        : tipoSensorRequestDTO.id();
+
     return new TipoSensor(
-        tipoSensorRequestDTO.id(),
+        id,
         tipoSensorRequestDTO.nome(),
         tipoSensorRequestDTO.unidadeMedida(),
         tipoSensorRequestDTO.descricao(),

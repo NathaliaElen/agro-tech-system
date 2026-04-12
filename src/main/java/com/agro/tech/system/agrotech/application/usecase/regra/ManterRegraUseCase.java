@@ -19,8 +19,10 @@ public class ManterRegraUseCase {
 	
 	public Regra salvarRegra(RegraRequestDTO regraRequestDTO) {
 		
+		String id = (regraRequestDTO.id() == null || regraRequestDTO.id().isBlank()) ? null : regraRequestDTO.id();
+
 		Regra regra = new Regra(
-				regraRequestDTO.id(),
+				id,
 				regraRequestDTO.nome(),
 				regraRequestDTO.descricao(),
 				regraRequestDTO.tipoSensorId(),

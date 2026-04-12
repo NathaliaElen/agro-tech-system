@@ -25,8 +25,9 @@ public class UsuarioDtoMapper {
 
     // Novo: mapeia direto do request DTO para o modelo de domínio
     public static Usuario toModel(UsuarioRequestDTO usuarioDto) {
+        String id = (usuarioDto.id() == null || usuarioDto.id().isBlank()) ? null : usuarioDto.id();
         return new Usuario(
-                usuarioDto.id(),
+                id,
                 usuarioDto.nome(),
                 usuarioDto.email(),
                 usuarioDto.senhaHash(),
