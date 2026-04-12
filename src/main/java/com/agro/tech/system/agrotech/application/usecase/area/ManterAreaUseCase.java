@@ -21,8 +21,9 @@ public class ManterAreaUseCase {
 	
 	public Area salvarArea(AreaRequestDTO areaRequestDto) {
 
+		String id = (areaRequestDto.id() == null || areaRequestDto.id().isBlank()) ? null : areaRequestDto.id();
 		Area area = new Area(
-				areaRequestDto.id(),
+				id,
 				areaRequestDto.nome(),
 				areaRequestDto.codigo(),
 				areaRequestDto.latitude(),

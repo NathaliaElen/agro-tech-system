@@ -20,8 +20,9 @@ public class ManterAlertaUseCase {
 	
 	public Alerta salvarAlerta(AlertaRequestDTO alertaRequestDTO) {
 		
+		String id = (alertaRequestDTO.id() == null || alertaRequestDTO.id().isBlank()) ? null : alertaRequestDTO.id();
 		Alerta alerta = new Alerta(
-				alertaRequestDTO.id(),
+				id,
 				alertaRequestDTO.regraId(),
 				alertaRequestDTO.leituraSensorId(),
 				Prioridade.fromDescricao(alertaRequestDTO.prioridade()),

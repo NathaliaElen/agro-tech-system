@@ -11,8 +11,9 @@ public class LeituraSensorMapper {
   * Converter LeituraSensorRequestDTO para LeituraSensor (Model)
   */
   public static LeituraSensor toModel(LeituraSensorRequestDTO leituraSensorRequestDTO) {
+    String id = (leituraSensorRequestDTO.id() == null || leituraSensorRequestDTO.id().isBlank()) ? null : leituraSensorRequestDTO.id();
     return new LeituraSensor(
-        leituraSensorRequestDTO.id(),
+        id,
         leituraSensorRequestDTO.sensorId(),
         leituraSensorRequestDTO.areaId(),
         LocalDateTime.now(),

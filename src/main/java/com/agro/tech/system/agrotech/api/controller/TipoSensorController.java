@@ -31,14 +31,14 @@ public class TipoSensorController {
 	private final ListarTipoSensorUseCase listarTipoSensorUseCase;
 
 	@PostMapping
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> salvar(@RequestBody @Valid TipoSensorRequestDTO tipoSensorRequestDTO) {
 		manterTipoSensorUseCase.salvarTipoSensor(tipoSensorRequestDTO);
 		return ResponseEntity.status(201).build();
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> deletar(@PathVariable String id) {
 		deletarTipoSensorUseCase.deletarTipoSensor(id);
 		return ResponseEntity.noContent().build();
