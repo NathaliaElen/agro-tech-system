@@ -46,37 +46,37 @@ public class RegraController {
     }
     
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<RegraResponseDTO>> buscartodos() {
         return ResponseEntity.ok(listarRegraUseCase.buscarTodos());
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<RegraResponseDTO> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(listarRegraUseCase.buscarPorId(id));
     }
     
     @GetMapping("/buscarportiposensor/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<RegraResponseDTO>> buscarPorTipoSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarRegraUseCase.buscarPorTipoSensorId(id));
     } 
     
     @GetMapping("/buscarporsensor/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<RegraResponseDTO>> buscarPorSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarRegraUseCase.buscarPorSensorId(id));
     }  
     
     @GetMapping("/buscarporprioridade/{prioridade}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<RegraResponseDTO>> buscarPorPrioridade(@PathVariable String prioridade) {
         return ResponseEntity.ok(listarRegraUseCase.buscarPorPrioridade(prioridade));
     }  
     
     @GetMapping("/buscarporarea/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<RegraResponseDTO>> buscarPorAreaId(@PathVariable String id) {
         return ResponseEntity.ok(listarRegraUseCase.buscarPorAreaId(id));
     }      
