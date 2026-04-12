@@ -2,17 +2,15 @@ package com.agro.tech.system.agrotech.api.controller;
 
 import com.agro.tech.system.agrotech.api.dto.request.UsuarioPerfilRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.UsuarioPerfilResponseDTO;
-import com.agro.tech.system.agrotech.api.dto.response.UsuarioResponseDTO;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.BuscarUsuarioPerfilPorPerfilIdUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.BuscarUsuarioPerfilPorUsuarioIdUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.CadastrarUsuarioPerfilUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.DeletarUsuarioPerfilPorUsuarioId;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.ListarTodosUsuariosPerfilUseCase;
-import com.agro.tech.system.agrotech.domain.repository.UsuarioPerfilRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,12 +32,14 @@ public class UsuarioPerfilController {
     private final DeletarUsuarioPerfilPorUsuarioId deletarUsuarioPerfilPorUsuarioId;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioPerfilRequestDTO requestDTO) {
         cadastrarUsuarioPerfilUseCase.executar(requestDTO);
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioPerfilResponseDTO>> listarTodos() {
 
         var usuarioPerfilResponse =  listarTodosUsuariosPerfilUseCase.executar();

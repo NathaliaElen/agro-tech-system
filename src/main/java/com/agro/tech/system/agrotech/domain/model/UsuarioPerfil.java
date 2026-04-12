@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.domain.model;
 
+import com.agro.tech.system.agrotech.domain.exception.perfil.NomeDoPerfilNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuarioperfil.PerfilIdNaoInformadoException;
 import com.agro.tech.system.agrotech.domain.exception.usuarioperfil.UsuarioIdNaoInformadoException;
 import lombok.Getter;
@@ -34,14 +35,12 @@ public class UsuarioPerfil {
         this.atualizadoEm = atualizadoEm;
         this.atualizadoPor = atualizadoPor;
 
-        if (usuarioId == null) {
+        if (usuarioId == null || usuarioId.isBlank()) {
             throw new UsuarioIdNaoInformadoException();
         }
 
-        if (perfilId == null) {
+        if (perfilId == null || perfilId.isBlank()) {
             throw new PerfilIdNaoInformadoException();
         }
     }
-
-
 }
