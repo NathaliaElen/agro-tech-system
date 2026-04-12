@@ -23,10 +23,13 @@ public class TokenService {
     public String gerarToken(LoginEntity loginEntity){
         Algorithm algoritimo = Algorithm.HMAC256(secret);
 
+        /*String subject = (loginEntity.getNome() != null && !loginEntity.getNome().isBlank())
+                ? loginEntity.getNome()
+                : loginEntity.getUsername();*/
+
         return JWT.create()
                 .withIssuer("grupo-2-java-avanade")
                 .withSubject(loginEntity.getUsername())
-                //.withSubject()
                 .withClaim("role", loginEntity.getPerfis().stream()
                         .filter(perfil -> "ADMIN".equalsIgnoreCase(perfil.getNome()))
                         .findFirst()
@@ -34,7 +37,7 @@ public class TokenService {
                         .map(PerfilEntity::getNome)
                         .map(String::toUpperCase)
                         .orElse("USER"))
-                .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
+                .withExpiresAt(dataExpiracao())
                 .sign(algoritimo);
     }
 
@@ -50,7 +53,7 @@ public class TokenService {
 
     private Instant dataExpiracao() {
         return LocalDateTime.now()
-                .plusHours(2).
-                toInstant(ZoneOffset.of("-03:00"));
+                .plusHours(10)
+                .toInstant(ZoneOffset.of("-03:00"));
     }
 }
