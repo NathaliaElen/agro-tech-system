@@ -2,12 +2,19 @@ package com.agro.tech.system.agrotech.infra.persistence.adapter;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
 
 import com.agro.tech.system.agrotech.domain.model.Regra;
 import com.agro.tech.system.agrotech.domain.repository.RegraRepository;
 import com.agro.tech.system.agrotech.infra.persistence.mapper.RegraMapper;
 import com.agro.tech.system.agrotech.infra.persistence.repository.JpaRegraRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
 public class RegraRepositoryAdapter implements RegraRepository{
 
 	private JpaRegraRepository jpaRegraRepository;
@@ -29,7 +36,7 @@ public class RegraRepositoryAdapter implements RegraRepository{
 
 		return jpaRegraRepository.findAll().stream()
 				.map(RegraMapper::toDomain)
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -37,14 +44,14 @@ public class RegraRepositoryAdapter implements RegraRepository{
 
 		return jpaRegraRepository.findByTipoSensorId(tipoSensorId).stream()
 				.map(RegraMapper::toDomain)
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Regra> buscarPorSensorId(String sensorId) {
 		return jpaRegraRepository.findBySensorId(sensorId).stream()
 				.map(RegraMapper::toDomain)
-				.toList();
+				.collect(Collectors.toList());
 	}
 
 	@Override
