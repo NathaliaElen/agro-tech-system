@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 public class BuscarUsuarioPorIdUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioResponseDTO buscarPorId(String id){
+    public UsuarioResponseDTO executar(String id){
         return usuarioRepository.buscarPorId(id)
                 .map(UsuarioDtoMapper::toResponseDto)
                 .orElseThrow(UsuarioNaoEncontradoException::new);

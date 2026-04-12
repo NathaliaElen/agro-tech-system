@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
+import com.agro.tech.system.agrotech.domain.mapper.UsuarioDtoMapper;
 import com.agro.tech.system.agrotech.domain.model.Usuario;
 import com.agro.tech.system.agrotech.domain.model.UsuarioPerfil;
 import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioEntity;
@@ -17,9 +18,8 @@ public class UsuarioMapper {
                 entity.getId(),
                 entity.getNome(),
                 entity.getEmail(),
-                entity.getPassword(),
+                entity.getSenha(),
                 entity.getStatus(),
-                PerfilMapper.toDomainPerfis(entity.getPerfis()),
                 entity.getCriadoEm(),
                 entity.getCriadoPor(),
                 entity.getAtualizadoEm(),
@@ -34,7 +34,6 @@ public class UsuarioMapper {
                 usuario.getEmail(),
                 usuario.getSenhaHash(), // ajustar se no domínio for getSenhaHash()
                 usuario.getStatus(),
-                PerfilMapper.toEntityPerfis(usuario.getPerfis()),
                 usuario.getCriadoEm(),
                 usuario.getCriadoPor(),
                 usuario.getAtualizadoEm(),

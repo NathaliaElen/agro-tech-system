@@ -1,5 +1,6 @@
 package com.agro.tech.system.agrotech.infra.security;
 
+import com.agro.tech.system.agrotech.infra.persistence.entity.LoginEntity;
 import com.agro.tech.system.agrotech.infra.persistence.repository.JpaUsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +25,6 @@ public class SecurityFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
         String token = recuperarToken(request);
-
         if (token != null) {
             String email = tokenService.getSubject(token);
 
@@ -34,7 +34,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                 var authentication = new UsernamePasswordAuthenticationToken(
                         usuario.get(),
                         null,
-                        usuario.get()
+                        new LoginEntity()
                                 .getAuthorities()
                 );
             }

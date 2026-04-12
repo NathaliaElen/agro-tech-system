@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 public class DeletarUsuarioUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public void deletarUsuario(@Valid String id){
+    public void executar(@Valid String id){
         usuarioRepository.buscarPorId(id)
                             .orElseThrow(UsuarioNaoEncontradoException::new);
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class ListarTodosUsuariosUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public List<UsuarioResponseDTO> listarTodos(){
+    public List<UsuarioResponseDTO> executar(){
         return UsuarioDtoMapper.toListDto(usuarioRepository.ListarTodos());
     }
 }

@@ -8,7 +8,6 @@ public record UsuarioResponseDTO (
             String id,
             String nome,
             String email,
-            Status status,
-            LocalDateTime criadoEm,
-            String criadoPor
+            String senha,
+            Status status
         ){ }

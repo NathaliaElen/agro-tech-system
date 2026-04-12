@@ -9,10 +9,6 @@ public record UsuarioRequestDTO (
             String nome,
             String email,
             String senhaHash,
-            Status status,
-            LocalDateTime criadoEm,
-            String criadoPor,
-            LocalDateTime atualizadoEm,
-            String atualizadoPor
+            Status status
 ){}
 

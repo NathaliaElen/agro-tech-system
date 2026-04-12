@@ -39,22 +39,19 @@ public class SecurityConfiguration {
         return http
                 // *****ATIVANDO O CORS AQUI
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable()) // Mantém desativado para API
+                .csrf(csrf -> csrf.disable()) // M
                 // CSRF: Cross-Site-Request Forgery
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // a instrução acima determina que: não estamos "guardando memoria" de quem esta
-                // "visitando/usando" a aplicação - portanto, cada requisição é feita como se fosse uma
-                // "folha em branco"
 
                 .authorizeHttpRequests(auth -> auth
-                        // 1. Liberação do Swagger (Adicionei o /swagger-ui.html e /swagger-ui/index.html)
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-                        // 2. Liberação do H2 Console (Obrigatório para ambiente dev)
                         .requestMatchers("/h2-console/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers("/usuarios/**").permitAll()
+                        .requestMatchers("/usuarios-perfil/**").permitAll()
+                        .requestMatchers("/perfis/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // 3. Importante: O H2 usa frames. O Spring bloqueia por padrão.
@@ -69,9 +66,11 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        //configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
+        //configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Accept"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -85,7 +84,6 @@ public class SecurityConfiguration {
     @Bean
     AuthenticationProvider authenticationProvider(AutenticacaoService autenticacaoService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(autenticacaoService);
-        //authProvider.setUserDetailsService(autenticacaoService); // Use o objeto que você criou
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }

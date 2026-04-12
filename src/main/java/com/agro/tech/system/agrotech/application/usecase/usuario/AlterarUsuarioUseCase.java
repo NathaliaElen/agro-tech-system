@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 public class AlterarUsuarioUseCase {
     private final UsuarioRepository usuarioRepository;
 
-    public void alterar(Usuario usuario){
+    public void executar(Usuario usuario){
 
         usuarioRepository.buscarPorId(usuario.getId())
                                 .orElseThrow(UsuarioNaoEncontradoException::new);

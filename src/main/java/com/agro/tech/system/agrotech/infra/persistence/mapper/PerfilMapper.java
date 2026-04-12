@@ -1,7 +1,10 @@
 package com.agro.tech.system.agrotech.infra.persistence.mapper;
 
 import com.agro.tech.system.agrotech.domain.model.Perfil;
+import com.agro.tech.system.agrotech.domain.model.Usuario;
+import com.agro.tech.system.agrotech.domain.model.UsuarioPerfil;
 import com.agro.tech.system.agrotech.infra.persistence.entity.PerfilEntity;
+import com.agro.tech.system.agrotech.infra.persistence.entity.UsuarioPerfilEntity;
 
 import java.util.List;
 
@@ -59,4 +62,5 @@ public class PerfilMapper {
                 .map(PerfilMapper::toEntity)
                 .toList();
     }
+
 }

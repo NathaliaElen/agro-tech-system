@@ -7,12 +7,16 @@ import com.agro.tech.system.agrotech.domain.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
 
 @Service
 @Validated
 @RequiredArgsConstructor
 public class CadastrarUsuarioUseCase {
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public void executar(UsuarioRequestDTO usuarioDto) {
         var existeLogin = usuarioRepository.existeLogin(usuarioDto.email());
@@ -21,6 +25,16 @@ public class CadastrarUsuarioUseCase {
             throw new UsuarioExistenteException();
         }
 
-        usuarioRepository.salvar(UsuarioDtoMapper.toModel(usuarioDto));
+        var usuario = UsuarioDtoMapper.toModel(usuarioDto);
+
+        usuario.setCriadoPor("Nelson");
+        usuario.setCriadoEm(LocalDateTime.now());
+
+        // Criptografa a senha antes de persistir
+        if (usuario.getSenhaHash() != null && !usuario.getSenhaHash().isBlank()) {
+            usuario.setSenhaHash(passwordEncoder.encode(usuario.getSenhaHash()));
+        }
+
+        usuarioRepository.salvar(usuario);
     }
 }

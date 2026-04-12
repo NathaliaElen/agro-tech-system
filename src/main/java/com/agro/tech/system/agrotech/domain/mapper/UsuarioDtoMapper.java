@@ -9,32 +9,42 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UsuarioDtoMapper {
-    public static Usuario toModel(UsuarioRequestDTO usuarioRequestDTO) {
+    public static Usuario toModel(UsuarioResponseDTO usuarioResponseDTO) {
         return new Usuario(
                 null,
-                usuarioRequestDTO.nome(),
-                usuarioRequestDTO.email(),
-                usuarioRequestDTO.senhaHash(),
-                usuarioRequestDTO.status(),
-                List.of(),
-                usuarioRequestDTO.criadoEm(),
-                usuarioRequestDTO.criadoPor(),
+                usuarioResponseDTO.nome(),
+                usuarioResponseDTO.email(),
+                usuarioResponseDTO.senha(),
+                usuarioResponseDTO.status(),
+                null,
+                null,
                 null,
                 null
         );
     }
 
-    public static UsuarioRequestDTO toRequestDto(Usuario usuario) {
-        return new UsuarioRequestDTO(
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuario.getSenhaHash(),
-                usuario.getStatus(),
-                usuario.getCriadoEm(),
-                usuario.getCriadoPor(),
+    // Novo: mapeia direto do request DTO para o modelo de domínio
+    public static Usuario toModel(UsuarioRequestDTO usuarioDto) {
+        return new Usuario(
+                usuarioDto.id(),
+                usuarioDto.nome(),
+                usuarioDto.email(),
+                usuarioDto.senhaHash(),
+                usuarioDto.status(),
+                null,
+                null,
                 null,
                 null
+        );
+    }
+
+    public static UsuarioResponseDTO toResponseDto(UsuarioRequestDTO usuarioDto) {
+        return new UsuarioResponseDTO(
+                usuarioDto.id(),
+                usuarioDto.nome(),
+                usuarioDto.email(),
+                usuarioDto.senhaHash(),
+                usuarioDto.status()
         );
     }
 
@@ -43,9 +53,8 @@ public class UsuarioDtoMapper {
                 usuario.getId(),
                 usuario.getNome(),
                 usuario.getEmail(),
-                usuario.getStatus(),
-                usuario.getCriadoEm(),
-                usuario.getCriadoPor()
+                usuario.getSenhaHash(),
+                usuario.getStatus()
         );
     }
 

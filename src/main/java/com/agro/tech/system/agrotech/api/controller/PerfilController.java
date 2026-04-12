@@ -9,6 +9,7 @@ import com.agro.tech.system.agrotech.application.usecase.perfil.DeletarPerfilUse
 import com.agro.tech.system.agrotech.application.usecase.perfil.ListarTodosPerfilUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,7 @@ public class PerfilController {
 
     @GetMapping
     public ResponseEntity<List<PerfilResponseDTO>> listarTodos() {
-        var perfilResponseDto = listarTodosPerfilUseCase.listarTodos();
+        var perfilResponseDto = listarTodosPerfilUseCase.executar();
 
         if (perfilResponseDto == null) ResponseEntity.noContent().build();
 
@@ -52,7 +53,7 @@ public class PerfilController {
     @GetMapping("/{id}")
     public ResponseEntity<PerfilResponseDTO> buscarPorId(@PathVariable String id) {
 
-        var perfilResponseDTO = buscarPerfilPorIdUseCase.buscarPorId(id);
+        var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
 
         if (perfilResponseDTO == null) ResponseEntity.noContent().build();
 
@@ -61,7 +62,7 @@ public class PerfilController {
 
     @GetMapping("/{nome}")
     public ResponseEntity<PerfilResponseDTO> buscarPorNome(@PathVariable String nome) {
-        var perfilResponseDTO = buscarPerfilPorNomeUserCase.buscarPorNome(nome);
+        var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(nome);
 
         if (perfilResponseDTO == null) ResponseEntity.noContent().build();
 
@@ -70,11 +71,11 @@ public class PerfilController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
-        var perfilResponseDTO = buscarPerfilPorNomeUserCase.buscarPorNome(id);
+        var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(id);
 
         if (perfilResponseDTO == null) ResponseEntity.noContent().build();
 
-        deletarPerfilUseCase.deletarPerfil(id);
+        deletarPerfilUseCase.executar(id);
 
         return ResponseEntity.ok().build();
     }
