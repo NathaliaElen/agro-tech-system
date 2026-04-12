@@ -39,7 +39,7 @@ public class LoginEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (perfis == null) return Collections.emptyList();
+        if (perfis == null || perfis.isEmpty()) return Collections.emptyList();
 
         boolean isAdmin = this.perfil.equalsIgnoreCase("ADMIN");
 
@@ -47,11 +47,22 @@ public class LoginEntity implements UserDetails {
 
         if (isAdmin) {
             for (PerfilEntity p : perfis) {
-                listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + p.getNome().toUpperCase()));
+                if (p == null) continue;
+                String nome = p.getNome();
+                if (nome == null) continue;
+                nome = nome.trim().toUpperCase();
+                if (nome.isEmpty()) continue;
+                String role = nome.startsWith("ROLE_") ? nome : "ROLE_" + nome;
+                listaPerfil.add(new SimpleGrantedAuthority(role));
             }
         } else {
-            perfis.forEach(p -> listaPerfil.add(new SimpleGrantedAuthority("ROLE_" + p.getNome().toUpperCase())));
-        }
+            perfis.forEach(p -> {
+                if (p == null || p.getNome() == null) return;
+                String nome = p.getNome().trim().toUpperCase();
+                if (nome.isEmpty()) return;
+                String role = nome.startsWith("ROLE_") ? nome : "ROLE_" + nome;
+                listaPerfil.add(new SimpleGrantedAuthority(role));
+            });        }
 
         return listaPerfil;
     }
@@ -59,11 +70,11 @@ public class LoginEntity implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return senha;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.nome;
     }
 }

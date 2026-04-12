@@ -15,7 +15,7 @@ public class BuscarPerfilPorIdUseCase {
     private final PerfilRepository perfilRepository;
 
     public PerfilResponseDTO executar(String id){
-        return perfilRepository.buscarPorNome(id)
+        return perfilRepository.buscarPorId(id)
                 .map(PerfilDtoMapper::toResponseDto)
                 .orElseThrow(PerfilNaoEncontradoException::new);
     }

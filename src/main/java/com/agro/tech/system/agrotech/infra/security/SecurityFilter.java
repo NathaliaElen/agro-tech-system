@@ -28,9 +28,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = recuperarToken(request);
         if (token != null) {
             try {
-                String email = tokenService.getSubject(token);
+                String username = tokenService.getSubject(token);
 
-                var usuario = jpaUsuarioRepository.findByEmail(email);
+                var usuario = jpaUsuarioRepository.findByNome(username);
 
                 if (usuario.isPresent()) {
                     var authentication = new UsernamePasswordAuthenticationToken(
@@ -59,4 +59,3 @@ public class SecurityFilter extends OncePerRequestFilter {
         return token.isEmpty() ? null : token;
     }
 }
-

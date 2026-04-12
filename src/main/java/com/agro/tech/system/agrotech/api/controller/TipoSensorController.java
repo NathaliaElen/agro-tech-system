@@ -38,7 +38,7 @@ public class TipoSensorController {
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> deletar(@PathVariable String id) {
 		deletarTipoSensorUseCase.deletarTipoSensor(id);
 		return ResponseEntity.noContent().build();
