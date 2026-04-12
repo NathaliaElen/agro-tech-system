@@ -34,7 +34,7 @@ public class PerfilController {
     private final ListarTodosPerfilUseCase listarTodosPerfilUseCase;
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid PerfilRequestDTO perfilDto) {
         cadatrarPerfilUseCase.executar(perfilDto);
 
@@ -43,7 +43,7 @@ public class PerfilController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<PerfilResponseDTO>> listarTodos() {
         var perfilResponseDto = listarTodosPerfilUseCase.executar();
 

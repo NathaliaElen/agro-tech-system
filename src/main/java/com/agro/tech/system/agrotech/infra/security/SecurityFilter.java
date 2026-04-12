@@ -3,6 +3,8 @@ package com.agro.tech.system.agrotech.infra.security;
 import java.io.IOException;
 import java.util.List;
 
+import com.agro.tech.system.agrotech.infra.persistence.entity.LoginEntity;
+import com.agro.tech.system.agrotech.infra.persistence.repository.JpaPerfilRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
     private final JpaUsuarioRepository jpaUsuarioRepository;
+    private final JpaPerfilRepository jpaPerfilRepository;
 
     @Override
     protected void doFilterInternal(
@@ -32,12 +35,18 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (token != null) {
             try {
                 String username = tokenService.getSubject(token);
-                String role = tokenService.getRole(token);
 
                 var usuario = jpaUsuarioRepository.findByNome(username);
+                var perfis = jpaPerfilRepository.findAll();
 
                 if (usuario.isPresent()) {
-                    var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
+                    var authorities = new LoginEntity(
+                            null,
+                            null,
+                            null,
+                             perfis,
+                             tokenService.getRole(token)
+                    ).getAuthorities();
                     var authentication = new UsernamePasswordAuthenticationToken(
                             usuario.get(),
                             null,
