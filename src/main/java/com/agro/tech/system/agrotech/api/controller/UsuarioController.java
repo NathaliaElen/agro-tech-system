@@ -48,7 +48,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
         var usuarioResponse =  listarTodosUsuariosUseCase.executar();
 

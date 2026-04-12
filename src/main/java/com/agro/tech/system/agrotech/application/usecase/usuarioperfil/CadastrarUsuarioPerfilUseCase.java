@@ -1,6 +1,6 @@
 package com.agro.tech.system.agrotech.application.usecase.usuarioperfil;
 
-import com.agro.tech.system.agrotech.api.dto.request.UsuarioPerfilRequestDTO;
+import com.agro.tech.system.agrotech.api.dto.request.UsuarioPerfilCreateRequestDTO;
 import com.agro.tech.system.agrotech.domain.mapper.UsuarioPerfilDtoMapper;
 import com.agro.tech.system.agrotech.domain.repository.UsuarioPerfilRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,7 @@ import org.springframework.validation.annotation.Validated;
 public class CadastrarUsuarioPerfilUseCase {
     private final UsuarioPerfilRepository usuarioPerfilRepository;
 
-    public void executar(UsuarioPerfilRequestDTO usuarioPerfilDTO) {
-
+    public void executar(UsuarioPerfilCreateRequestDTO usuarioPerfilDTO) {
         usuarioPerfilRepository.salvar(UsuarioPerfilDtoMapper.toModel(usuarioPerfilDTO));
     }
 }
