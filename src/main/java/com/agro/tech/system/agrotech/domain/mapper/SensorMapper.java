@@ -16,8 +16,9 @@ public class SensorMapper {
 				? Status.valueOf(sensorRequestDTO.status().toUpperCase()) 
 				: Status.ATIVO; // Status padrão
 		
+		String id = (sensorRequestDTO.id() == null || sensorRequestDTO.id().isBlank()) ? null : sensorRequestDTO.id();
 		return new Sensor(
-				sensorRequestDTO.id(),
+				id,
 				sensorRequestDTO.areaId(),
 				sensorRequestDTO.tipoSensorId(),
 				sensorRequestDTO.codigo(),

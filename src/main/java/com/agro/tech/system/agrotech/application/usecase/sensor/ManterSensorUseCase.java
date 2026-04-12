@@ -18,8 +18,9 @@ public class ManterSensorUseCase {
 	
 	public Sensor salvarSensor(SensorRequestDTO sensorRequestDto) {
 		
+		String id = (sensorRequestDto.id() == null || sensorRequestDto.id().isBlank()) ? null : sensorRequestDto.id();
 		Sensor sensor = new Sensor(
-				sensorRequestDto.id(),
+				id,
 				sensorRequestDto.areaId(),
 				sensorRequestDto.tipoSensorId(),
 				sensorRequestDto.codigo(),

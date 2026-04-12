@@ -18,9 +18,10 @@ public class UsuarioPerfilDtoMapper {
         );
     }
 
-    public static UsuarioPerfilEntity toEntity(UsuarioPerfilCreateRequestDTO usuarioPerfilRequestDto) {
+    public static UsuarioPerfilEntity toEntity(UsuarioPerfilRequestDTO usuarioPerfilRequestDto) {
+        String id = (usuarioPerfilRequestDto.id() == null || usuarioPerfilRequestDto.id().isBlank()) ? null : usuarioPerfilRequestDto.id();
         return new UsuarioPerfilEntity(
-                usuarioPerfilRequestDto.id(),
+                id,
                 usuarioPerfilRequestDto.usuarioId(),
                 usuarioPerfilRequestDto.perfilId(),
                 usuarioPerfilRequestDto.criadoEm(),
@@ -40,9 +41,10 @@ public class UsuarioPerfilDtoMapper {
         );
     }
 
-    public static UsuarioPerfil toModel(UsuarioPerfilCreateRequestDTO usuarioPerfilRequestDTO) {
+    public static UsuarioPerfil toModel(UsuarioPerfilRequestDTO usuarioPerfilRequestDTO) {
+        String id2 = (usuarioPerfilRequestDTO.id() == null || usuarioPerfilRequestDTO.id().isBlank()) ? null : usuarioPerfilRequestDTO.id();
         return new UsuarioPerfil(
-             null,
+                id2,
                 usuarioPerfilRequestDTO.usuarioId(),
                 usuarioPerfilRequestDTO.perfilId(),
                 usuarioPerfilRequestDTO.criadoEm(),

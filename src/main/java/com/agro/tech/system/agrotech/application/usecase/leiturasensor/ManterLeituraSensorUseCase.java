@@ -16,8 +16,9 @@ public class ManterLeituraSensorUseCase {
   private final LeituraSensorRepository leituraSensorRepository;
 
   public LeituraSensor salvarLeituraSensor(LeituraSensorRequestDTO leituraSensorRequestDTO) {
+    String id = (leituraSensorRequestDTO.id() == null || leituraSensorRequestDTO.id().isBlank()) ? null : leituraSensorRequestDTO.id();
     LeituraSensor leituraSensor = new LeituraSensor(
-        leituraSensorRequestDTO.id(),
+        id,
         leituraSensorRequestDTO.sensorId(),
         leituraSensorRequestDTO.areaId(),
         LocalDateTime.now(),
