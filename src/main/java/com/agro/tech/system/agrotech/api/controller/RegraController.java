@@ -32,14 +32,14 @@ public class RegraController {
 	private final ListarRegraUseCase listarRegraUseCase;
 
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> salvar(@RequestBody @Valid RegraRequestDTO regraRequestDTO) {
     	manterRegraUseCase.salvarRegra(regraRequestDTO);
         return ResponseEntity.status(201).build();                
     }	
         
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
     	deletarRegraUseCase.deletar(id);
         return ResponseEntity.noContent().build();

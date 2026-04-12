@@ -10,6 +10,7 @@ import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.ListarTod
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class UsuarioPerfilController {
     private final DeletarUsuarioPerfilPorUsuarioId deletarUsuarioPerfilPorUsuarioId;
 
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioPerfilCreateRequestDTO requestDTO) {
 
         cadastrarUsuarioPerfilUseCase.executar(requestDTO);
@@ -39,7 +40,7 @@ public class UsuarioPerfilController {
     }
 
     @GetMapping
-    //@PreAuthorize("hasRole({'USER','ADMIN'})")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioPerfilResponseDTO>> listarTodos() {
 
         var usuarioPerfilResponse =  listarTodosUsuariosPerfilUseCase.executar();
@@ -52,6 +53,7 @@ public class UsuarioPerfilController {
     }
 
     @GetMapping("/buscar-usuario/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -67,6 +69,7 @@ public class UsuarioPerfilController {
     }
 
     @GetMapping("/buscar-perfil/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -82,6 +85,7 @@ public class UsuarioPerfilController {
     }
 
     @DeleteMapping("/delete-usuario/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -99,6 +103,7 @@ public class UsuarioPerfilController {
     }
 
     @DeleteMapping("/delete-perfil/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();

@@ -34,7 +34,7 @@ public class PerfilController {
     private final ListarTodosPerfilUseCase listarTodosPerfilUseCase;
 
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid PerfilRequestDTO perfilDto) {
         cadatrarPerfilUseCase.executar(perfilDto);
 
@@ -43,7 +43,7 @@ public class PerfilController {
     }
 
     @GetMapping
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<PerfilResponseDTO>> listarTodos() {
         var perfilResponseDto = listarTodosPerfilUseCase.executar();
 
@@ -53,7 +53,7 @@ public class PerfilController {
     }
 
     @GetMapping("/id/{id}")
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<PerfilResponseDTO> buscarPorId(@PathVariable String id) {
 
         var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
@@ -64,7 +64,7 @@ public class PerfilController {
     }
 
     @GetMapping("/nome/{nome}")
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<PerfilResponseDTO> buscarPorNome(@PathVariable String nome) {
         var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(nome);
 
@@ -74,7 +74,7 @@ public class PerfilController {
     }
 
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
 

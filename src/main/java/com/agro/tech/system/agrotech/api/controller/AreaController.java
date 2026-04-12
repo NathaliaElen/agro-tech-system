@@ -25,7 +25,7 @@ public class AreaController {
 	private final ListarAreaUseCase listarAreaUseCase;
 	
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> salvar(@RequestBody @Valid AreaRequestDTO dto) {
     	manterAreaUseCase.salvarArea(dto);
         return ResponseEntity.status(201).build();
@@ -33,7 +33,7 @@ public class AreaController {
     }	
     
     @DeleteMapping("/{id}")
-   //@PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         deletarAreaUseCase.deletar(id);
         return ResponseEntity.noContent().build();
