@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
 import com.agro.tech.system.agrotech.domain.model.Sensor;
 import com.agro.tech.system.agrotech.domain.repository.SensorRepository;
 import com.agro.tech.system.agrotech.infra.persistence.mapper.SensorMapper;
