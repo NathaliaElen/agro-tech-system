@@ -2,8 +2,6 @@ package com.agro.tech.system.agrotech.infra.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +34,6 @@ public class TipoSensorEntity {
 	@Column(nullable = true, length = 255, name = "descricao")
 	private String descricao;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, name = "status")
 	private String status;
 }
