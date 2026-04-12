@@ -43,7 +43,7 @@ public class SensorEntity {
 	@Column(nullable = true, name = "intervalo_segundos")
 	private Integer intervaloSegundos;
 	
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.STRING)
 	@Column(nullable = false, name = "status")
 	private String status;
 	
