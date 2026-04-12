@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class PerfilController {
     private final ListarTodosPerfilUseCase listarTodosPerfilUseCase;
 
     @PostMapping
-    // @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid PerfilRequestDTO perfilDto) {
         cadatrarPerfilUseCase.executar(perfilDto);
 
@@ -42,6 +43,7 @@ public class PerfilController {
     }
 
     @GetMapping
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<PerfilResponseDTO>> listarTodos() {
         var perfilResponseDto = listarTodosPerfilUseCase.executar();
 
@@ -50,7 +52,8 @@ public class PerfilController {
         return ResponseEntity.ok(perfilResponseDto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<PerfilResponseDTO> buscarPorId(@PathVariable String id) {
 
         var perfilResponseDTO = buscarPerfilPorIdUseCase.executar(id);
@@ -60,7 +63,8 @@ public class PerfilController {
         return ResponseEntity.ok(perfilResponseDTO);
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<PerfilResponseDTO> buscarPorNome(@PathVariable String nome) {
         var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(nome);
 
@@ -70,6 +74,7 @@ public class PerfilController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         var perfilResponseDTO = buscarPerfilPorNomeUserCase.executar(id);
 
