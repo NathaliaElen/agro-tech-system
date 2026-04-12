@@ -60,7 +60,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/id/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -76,7 +76,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/nome/{nome}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorNome(@PathVariable String nome) {
         if (nome.isBlank()){
             throw new NomeUsuarioNaoInformadoException();
@@ -93,7 +93,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/email/{email}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) {
         var usuarioResponse =  buscarUsuarioPorEmailUseCase.executar(email);
 
@@ -105,7 +105,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUsuarioPorId(@PathVariable String id) {
 
         var usuario =  buscarUsuarioPorIdUsecase.executar(id);

@@ -31,14 +31,14 @@ public class AlertaController {
 	private final ListarAlertaUseCase listarAlertaUseCase;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> salvar(@RequestBody @Valid AlertaRequestDTO alertaRequestDTO) {
     	manterAlertaUseCase.salvarAlerta(alertaRequestDTO);
         return ResponseEntity.status(201).build();                
     }		
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         deletarAlertaUseCase.deletar(id);
         return ResponseEntity.noContent().build();
