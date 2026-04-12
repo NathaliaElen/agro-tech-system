@@ -8,13 +8,13 @@ import lombok.ToString;
 @Getter
 @ToString
 public class LeituraSensor {
-	private Long id;
-	private Sensor sensorId;
-	private Area areaId;
+	private String id;
+	private String sensorId;
+	private String areaId;
 	private LocalDateTime dataHora;
 	private Double valor;
 	
-	public LeituraSensor(Long id, Sensor sensorId, Area areaId, LocalDateTime dataHora, Double valor) {
+	public LeituraSensor(String id, String sensorId, String areaId, LocalDateTime dataHora, Double valor) {
 		super();
 		this.id = id;
 		this.sensorId = sensorId;

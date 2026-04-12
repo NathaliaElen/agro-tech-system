@@ -1,6 +1,7 @@
 package com.agro.tech.system.agrotech.application.usecase.alerta;
 
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.agro.tech.system.agrotech.api.dto.request.AlertaRequestDTO;
 import com.agro.tech.system.agrotech.domain.enums.Prioridade;
@@ -11,6 +12,7 @@ import com.agro.tech.system.agrotech.domain.repository.AlertaRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class ManterAlertaUseCase {
 
