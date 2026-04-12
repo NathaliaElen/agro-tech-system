@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RegraRepositoryAdapter implements RegraRepository{
 
-	private JpaRegraRepository jpaRegraRepository;
+	private final JpaRegraRepository jpaRegraRepository;
 	
 	@Override
 	public Regra salvar(Regra regra) {

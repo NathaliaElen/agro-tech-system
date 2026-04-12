@@ -51,8 +51,7 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/buscarporusuarioid/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/buscar-usuario/{id}")
     public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -67,8 +66,7 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/buscarporperfilid/{id}")
-    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/buscar-perfil/{id}")
     public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -83,8 +81,7 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/deletarporusuarioid/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete-usuario/{id}")
     public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -101,8 +98,7 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/deletarporperfilid/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete-perfil/{id}")
     public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
