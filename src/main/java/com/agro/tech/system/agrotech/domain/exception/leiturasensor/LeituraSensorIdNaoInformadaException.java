@@ -1,4 +1,4 @@
-package com.agro.tech.system.agrotech.domain.exception.leitura;
+package com.agro.tech.system.agrotech.domain.exception.leiturasensor;
 
 public class LeituraSensorIdNaoInformadaException extends RuntimeException{
 
