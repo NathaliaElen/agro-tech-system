@@ -56,12 +56,18 @@ public class ListarAlertaUseCase {
 				.collect(Collectors.toList());
 	}
 
-	public List<AlertaResponseDTO> buscarPorAreaId(String areaId){
-		
+	public List<AlertaResponseDTO> buscarPorAreaId(String areaId) {
+
 		return alertaRepository.buscarPorAreaId(areaId).stream()
 				.map(AlertaMapper::mapToResponse)
 				.collect(Collectors.toList());
 	}
-	
+
+	public List<AlertaResponseDTO> buscarPorLeituraSensorId(String leituraSensorId) {
+
+		return alertaRepository.buscarPorLeituraSensorId(leituraSensorId).stream()
+				.map(AlertaMapper::mapToResponse)
+				.collect(Collectors.toList());
+	}
 
 }

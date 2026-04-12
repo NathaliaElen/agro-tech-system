@@ -104,5 +104,13 @@ public class AlertaRepositoryAdapter implements AlertaRepository{
 								.collect(Collectors.toList())
 				));
 	}
+
+	@Override
+	public List<Alerta> buscarPorLeituraSensorId(String leituraSensorId) {
+		return jpaAlertaRepository.findByLeituraSensorId(leituraSensorId)
+				.stream()
+				.map(AlertaMapper::toDomain)
+				.collect(Collectors.toList());
+	}
     
 }

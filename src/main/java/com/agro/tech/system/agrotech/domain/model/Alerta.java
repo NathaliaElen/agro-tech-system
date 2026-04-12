@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.agro.tech.system.agrotech.domain.enums.Prioridade;
 import com.agro.tech.system.agrotech.domain.exception.alerta.MensagemAlertaNaoInformadaException;
-import com.agro.tech.system.agrotech.domain.exception.leitura.LeituraSensorIdNaoInformadaException;
+import com.agro.tech.system.agrotech.domain.exception.leiturasensor.LeituraSensorIdNaoInformadaException;
 import com.agro.tech.system.agrotech.domain.exception.regra.RegraIdNaoInformadaException;
 import lombok.Getter;
 import lombok.ToString;

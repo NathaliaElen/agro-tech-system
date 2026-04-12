@@ -41,7 +41,7 @@ public class DeletarAreaUseCase {
 		
 		//VALIDAR SE A AREA ESTA ASSOCIADA A UMA REGRA
 		List<RegraResponseDTO> listaRegra = listarRegraUseCase.buscarPorAreaId(id);
-		if (listaRegra.size() < 1) {
+		if (listaRegra.size() > 0) {
 			throw new AreaExistenteEmRegraException();
 		}	
 		areaRepository.deletar(id);
