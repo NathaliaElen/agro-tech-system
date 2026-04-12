@@ -18,7 +18,7 @@ public class UsuarioPerfilDtoMapper {
         );
     }
 
-    public static UsuarioPerfilEntity toEntity(UsuarioPerfilRequestDTO usuarioPerfilRequestDto) {
+    public static UsuarioPerfilEntity toEntity(UsuarioPerfilCreateRequestDTO usuarioPerfilRequestDto) {
         String id = (usuarioPerfilRequestDto.id() == null || usuarioPerfilRequestDto.id().isBlank()) ? null : usuarioPerfilRequestDto.id();
         return new UsuarioPerfilEntity(
                 id,
@@ -41,7 +41,7 @@ public class UsuarioPerfilDtoMapper {
         );
     }
 
-    public static UsuarioPerfil toModel(UsuarioPerfilRequestDTO usuarioPerfilRequestDTO) {
+    public static UsuarioPerfil toModel(UsuarioPerfilCreateRequestDTO usuarioPerfilRequestDTO) {
         String id2 = (usuarioPerfilRequestDTO.id() == null || usuarioPerfilRequestDTO.id().isBlank()) ? null : usuarioPerfilRequestDTO.id();
         return new UsuarioPerfil(
                 id2,
