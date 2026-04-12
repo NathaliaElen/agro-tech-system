@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ public class UsuarioController {
     private final DeletarUsuarioUseCase deletarUsuarioUseCase;
 
     @PostMapping
-    // @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioRequestDTO usuarioDto) {
 
         cadatrarUsuarioUseCase.executar(usuarioDto);
@@ -47,6 +48,7 @@ public class UsuarioController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
         var usuarioResponse =  listarTodosUsuariosUseCase.executar();
 
@@ -57,7 +59,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioResponse);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable String id) {
         if (id.isBlank()){
             return ResponseEntity.notFound().build();
@@ -72,7 +75,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioResponse);
     }
 
-    @GetMapping("/{nome}")
+    @GetMapping("/nome/{nome}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorNome(@PathVariable String nome) {
         if (nome.isBlank()){
             throw new NomeUsuarioNaoInformadoException();
@@ -88,7 +92,8 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UsuarioResponseDTO> buscarPorEmail(@PathVariable String email) {
         var usuarioResponse =  buscarUsuarioPorEmailUseCase.executar(email);
 
@@ -100,6 +105,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUsuarioPorId(@PathVariable String id) {
 
         var usuario =  buscarUsuarioPorIdUsecase.executar(id);

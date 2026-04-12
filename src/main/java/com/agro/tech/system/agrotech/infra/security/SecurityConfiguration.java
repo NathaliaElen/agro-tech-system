@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/usuarios/**").permitAll()
                         .requestMatchers("/usuarios-perfil/**").permitAll()
                         .requestMatchers("/perfis/**").permitAll()
+                        .requestMatchers("/sensores/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 // 3. Importante: O H2 usa frames. O Spring bloqueia por padrão.

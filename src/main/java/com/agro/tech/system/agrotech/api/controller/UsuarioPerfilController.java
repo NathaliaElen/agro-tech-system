@@ -2,17 +2,15 @@ package com.agro.tech.system.agrotech.api.controller;
 
 import com.agro.tech.system.agrotech.api.dto.request.UsuarioPerfilRequestDTO;
 import com.agro.tech.system.agrotech.api.dto.response.UsuarioPerfilResponseDTO;
-import com.agro.tech.system.agrotech.api.dto.response.UsuarioResponseDTO;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.BuscarUsuarioPerfilPorPerfilIdUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.BuscarUsuarioPerfilPorUsuarioIdUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.CadastrarUsuarioPerfilUseCase;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.DeletarUsuarioPerfilPorUsuarioId;
 import com.agro.tech.system.agrotech.application.usecase.usuarioperfil.ListarTodosUsuariosPerfilUseCase;
-import com.agro.tech.system.agrotech.domain.repository.UsuarioPerfilRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,12 +32,14 @@ public class UsuarioPerfilController {
     private final DeletarUsuarioPerfilPorUsuarioId deletarUsuarioPerfilPorUsuarioId;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioPerfilRequestDTO requestDTO) {
         cadastrarUsuarioPerfilUseCase.executar(requestDTO);
         return ResponseEntity.status(201).build();
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioPerfilResponseDTO>> listarTodos() {
 
         var usuarioPerfilResponse =  listarTodosUsuariosPerfilUseCase.executar();
@@ -51,13 +51,14 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/{usuarioId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String usuarioId) {
-        if (usuarioId.isBlank()){
+    @GetMapping("/buscarporusuarioid/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorUsuarioId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(usuarioId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
@@ -66,13 +67,14 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @GetMapping("/{perfilId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String perfilId) {
-        if (perfilId.isBlank()){
+    @GetMapping("/buscarporperfilid/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<UsuarioPerfilResponseDTO> buscarPorPerfilId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(perfilId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorPerfilIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
@@ -81,36 +83,38 @@ public class UsuarioPerfilController {
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/{usuarioId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String usuarioId) {
-        if (usuarioId.isBlank()){
+    @DeleteMapping("/deletarporusuarioid/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorUsuarioId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(usuarioId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
         }
 
-        deletarUsuarioPerfilPorUsuarioId.executar(usuarioId);
+        deletarUsuarioPerfilPorUsuarioId.executar(id);
 
         return ResponseEntity.ok(usuarioPerfilResponse);
     }
 
-    @DeleteMapping("/{perfilId}")
-    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String perfilId) {
-        if (perfilId.isBlank()){
+    @DeleteMapping("/deletarporperfilid/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UsuarioPerfilResponseDTO> deletarPorPerfilId(@PathVariable String id) {
+        if (id.isBlank()){
             return ResponseEntity.notFound().build();
         }
 
-        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(perfilId);
+        var usuarioPerfilResponse =  buscarUsuarioPerfilPorUsuarioIdUseCase.executar(id);
 
         if (usuarioPerfilResponse == null) {
             return ResponseEntity.notFound().build();
         }
 
-        deletarUsuarioPerfilPorUsuarioId.executar(perfilId);
+        deletarUsuarioPerfilPorUsuarioId.executar(id);
 
         return ResponseEntity.ok(usuarioPerfilResponse);
     }

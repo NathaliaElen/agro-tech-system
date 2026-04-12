@@ -44,7 +44,7 @@ public class TipoSensorController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping
+	@GetMapping("/buscartodos")
 	public ResponseEntity<List<TipoSensorResponseDTO>> buscarTodos() {
 		return ResponseEntity.ok(listarTipoSensorUseCase.buscarTodos());
 	}
