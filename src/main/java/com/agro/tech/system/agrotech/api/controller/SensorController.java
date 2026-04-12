@@ -45,26 +45,31 @@ public class SensorController {
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarTodos() {
     return ResponseEntity.ok(listarSensorUseCase.buscarTodos());
   }
 
   @GetMapping("/buscarporid/{id}")
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<SensorResponseDTO> buscarPorId(@PathVariable String id) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorId(id));
   }
 
   @GetMapping("/buscarporcodigo/{codigo}")
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<SensorResponseDTO> buscarPorCodigo(@PathVariable String codigo) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorCodigo(codigo));
   }
 
   @GetMapping("/buscarporareaid/{areaId}")
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarPorAreaId(@PathVariable String areaId) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorAreaId(areaId));
   }
 
   @GetMapping("/buscarporstatus/{status}")
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarPorStatus(@PathVariable String status) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorStatus(status));
   }
