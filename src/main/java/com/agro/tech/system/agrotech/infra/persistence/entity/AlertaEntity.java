@@ -2,8 +2,6 @@ package com.agro.tech.system.agrotech.infra.persistence.entity;
 
 import java.time.LocalDateTime;
 
-import com.agro.tech.system.agrotech.domain.enums.Status;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

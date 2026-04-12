@@ -10,4 +10,6 @@ public interface JpaAlertaRepository extends JpaRepository<AlertaEntity,String>{
 	List<AlertaEntity> findByPrioridade(String prioridade);
 
     List<AlertaEntity> findByLeituraSensorIdIn(List<String> leituraSensorIds);
+
+    List<AlertaEntity> findByLeituraSensorId(String leituraSensorId);
 }

@@ -14,6 +14,7 @@ public interface AlertaRepository {
     List<Alerta> buscarPorSensorId(String sensorId);
     List<Alerta> buscarPorPrioridade(String prioridade);
     List<Alerta> buscarPorAreaId(String areaId);
+    List<Alerta> buscarPorLeituraSensorId(String leituraSensorId);
+    void deletar(String id);
     
-    void deletar(String id);	
 }
