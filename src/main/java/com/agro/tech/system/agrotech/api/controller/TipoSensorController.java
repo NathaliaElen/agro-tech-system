@@ -31,39 +31,39 @@ public class TipoSensorController {
 	private final ListarTipoSensorUseCase listarTipoSensorUseCase;
 
 	@PostMapping
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> salvar(@RequestBody @Valid TipoSensorRequestDTO tipoSensorRequestDTO) {
 		manterTipoSensorUseCase.salvarTipoSensor(tipoSensorRequestDTO);
 		return ResponseEntity.status(201).build();
 	}
 
 	@DeleteMapping("/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Void> deletar(@PathVariable String id) {
 		deletarTipoSensorUseCase.deletarTipoSensor(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@GetMapping("/buscartodos")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<List<TipoSensorResponseDTO>> buscarTodos() {
 		return ResponseEntity.ok(listarTipoSensorUseCase.buscarTodos());
 	}
 
 	@GetMapping("/buscarporid/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<TipoSensorResponseDTO> buscarPorId(@PathVariable String id) {
 		return ResponseEntity.ok(listarTipoSensorUseCase.buscarPorId(id));
 	}
 
 	@GetMapping("/buscarpornome/{nome}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<TipoSensorResponseDTO> buscarPorNome(@PathVariable String nome) {
 		return ResponseEntity.ok(listarTipoSensorUseCase.buscarPorNome(nome));
 	}
 
 	@GetMapping("/buscarporstatus/{status}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<List<TipoSensorResponseDTO>> buscarPorStatus(@PathVariable String status) {
 		return ResponseEntity.ok(listarTipoSensorUseCase.buscarPorStatus(status));
 	}

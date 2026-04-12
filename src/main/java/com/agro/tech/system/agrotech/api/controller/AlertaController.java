@@ -31,51 +31,51 @@ public class AlertaController {
 	private final ListarAlertaUseCase listarAlertaUseCase;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> salvar(@RequestBody @Valid AlertaRequestDTO alertaRequestDTO) {
     	manterAlertaUseCase.salvarAlerta(alertaRequestDTO);
         return ResponseEntity.status(201).build();                
     }		
     
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         deletarAlertaUseCase.deletar(id);
         return ResponseEntity.noContent().build();
     }	
     
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscartodos() {
         return ResponseEntity.ok(listarAlertaUseCase.buscarTodos());
     }
     
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<AlertaResponseDTO> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorId(id));
     }
 
     @GetMapping("/buscarportiposensor/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorTipoSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorTipoSensorId(id));
     }  
 
     @GetMapping("/buscarporsensor/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorSensorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorSensorId(id));
     }  
     
     @GetMapping("/buscarporprioridade/{prioridade}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorPrioridade(@PathVariable String prioridade) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorPrioridade(prioridade));
     }  
       
     @GetMapping("/buscarporarea/{id}")
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AlertaResponseDTO>> buscarPorAreaId(@PathVariable String id) {
         return ResponseEntity.ok(listarAlertaUseCase.buscarPorAreaId(id));
     }      

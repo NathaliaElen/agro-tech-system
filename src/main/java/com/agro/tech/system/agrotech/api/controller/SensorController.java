@@ -31,45 +31,45 @@ public class SensorController {
   private final ListarSensorUseCase listarSensorUseCase;
 
   @PostMapping
-  @PreAuthorize("hasRole('ADMIN')")
+  //@PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> salvar(@RequestBody @Valid SensorRequestDTO sensorRequestDTO) {
     manterSensorUseCase.salvarSensor(sensorRequestDTO);
     return ResponseEntity.status(201).build();
   }
 
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
+  //@PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deletar(@PathVariable String id) {
     deletarSensorUseCase.deletarSensor(id);
     return ResponseEntity.noContent().build();
   }
 
   @GetMapping
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarTodos() {
     return ResponseEntity.ok(listarSensorUseCase.buscarTodos());
   }
 
   @GetMapping("/buscarporid/{id}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<SensorResponseDTO> buscarPorId(@PathVariable String id) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorId(id));
   }
 
   @GetMapping("/buscarporcodigo/{codigo}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<SensorResponseDTO> buscarPorCodigo(@PathVariable String codigo) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorCodigo(codigo));
   }
 
   @GetMapping("/buscarporareaid/{areaId}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarPorAreaId(@PathVariable String areaId) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorAreaId(areaId));
   }
 
   @GetMapping("/buscarporstatus/{status}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<SensorResponseDTO>> buscarPorStatus(@PathVariable String status) {
     return ResponseEntity.ok(listarSensorUseCase.buscarPorStatus(status));
   }
