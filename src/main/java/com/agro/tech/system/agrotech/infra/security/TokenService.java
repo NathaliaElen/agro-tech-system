@@ -26,6 +26,7 @@ public class TokenService {
         return JWT.create()
                 .withIssuer("grupo-2-java-avanade")
                 .withSubject(loginEntity.getUsername())
+                //.withSubject()
                 .withClaim("role", loginEntity.getPerfis().stream()
                         .filter(perfil -> "ADMIN".equalsIgnoreCase(perfil.getNome()))
                         .findFirst()
