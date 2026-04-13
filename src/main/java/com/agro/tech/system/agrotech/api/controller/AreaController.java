@@ -33,20 +33,28 @@ public class AreaController {
     }	
     
     @DeleteMapping("/{id}")
+<<<<<<< HEAD
     @PreAuthorize("hasRole('ADMIN')")
+=======
+    //@PreAuthorize("hasRole('ADMIN')")
+>>>>>>> fcc5ac43c1a09aeca41b7869610675b7c8203c7b
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         deletarAreaUseCase.deletar(id);
         return ResponseEntity.noContent().build();
     }	
         
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AreaResponseDTO>> buscartodos() {
         return ResponseEntity.ok(listarAreaUseCase.buscarTodos());
     }	 
     
     @GetMapping("/{id}")
+<<<<<<< HEAD
     @PreAuthorize("hasRole('USER')")
+=======
+    //@PreAuthorize("hasRole('USER')")    
+>>>>>>> fcc5ac43c1a09aeca41b7869610675b7c8203c7b
     public ResponseEntity<AreaResponseDTO> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(listarAreaUseCase.buscarPorId(id));
     }

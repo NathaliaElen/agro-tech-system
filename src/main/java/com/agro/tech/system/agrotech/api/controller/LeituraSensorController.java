@@ -45,25 +45,25 @@ public class LeituraSensorController {
   }
 
   @GetMapping
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<LeituraSensorResponseDTO>> buscarTodos() {
     return ResponseEntity.ok(listarLeituraSensorUseCase.buscarTodos());
   }
 
   @GetMapping("/{id}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<LeituraSensorResponseDTO> buscarPorId(@PathVariable String id) {
     return ResponseEntity.ok(listarLeituraSensorUseCase.buscarPorId(id));
   }
 
   @GetMapping("/buscarporsensorid/{sensorId}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<LeituraSensorResponseDTO>> buscarPorSensorId(@PathVariable String sensorId) {
     return ResponseEntity.ok(listarLeituraSensorUseCase.buscarPorSensorId(sensorId));
   }
 
   @GetMapping("/buscarporareaid/{areaId}")
-  @PreAuthorize("hasRole('USER')")
+  //@PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<LeituraSensorResponseDTO>> buscarPorAreaId(@PathVariable String areaId) {
     return ResponseEntity.ok(listarLeituraSensorUseCase.buscarPorAreaId(areaId));
   }
