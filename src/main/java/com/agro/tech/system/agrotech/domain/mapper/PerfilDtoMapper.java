@@ -6,6 +6,7 @@ import com.agro.tech.system.agrotech.api.dto.response.UsuarioResponseDTO;
 import com.agro.tech.system.agrotech.domain.model.Perfil;
 import com.agro.tech.system.agrotech.domain.model.Usuario;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -49,12 +50,16 @@ public class PerfilDtoMapper {
 
     public static Perfil toModel(PerfilRequestDTO perfil){
         String id = (perfil.id() == null || perfil.id().isBlank()) ? null : perfil.id();
+        LocalDateTime criadoEm  = (perfil.criadoEm() == null ) ? LocalDateTime.now() : perfil.criadoEm();
+        String criadoPor = (perfil.criadoPor() == null || perfil.criadoPor().isBlank()) ? "132456" : perfil.criadoPor();
         return new Perfil(
                 id,
                 perfil.nome(),
                 perfil.status(),
-                perfil.criadoEm(),
-                perfil.criadoPor(),
+                //perfil.criadoEm(),
+                criadoEm,
+                //perfil.criadoPor(),
+                criadoPor,
                 perfil.atualizadoEm(),
                 perfil.atualizadoPor()
         );
