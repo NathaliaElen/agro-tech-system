@@ -31,14 +31,14 @@ public class LeituraSensorController {
   private final ListarLeituraSensorUseCase listarLeituraSensorUseCase;
 
   @PostMapping
-  //@PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> salvar(@RequestBody @Valid LeituraSensorRequestDTO leituraSensorRequestDTO) {
     manterLeituraSensorUseCase.salvarLeituraSensor(leituraSensorRequestDTO);
     return ResponseEntity.status(201).build();
   }
 
   @DeleteMapping("/{id}")
-  //@PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deletar(@PathVariable String id) {
     deletarLeituraSensorUseCase.deletarLeituraSensor(id);
     return ResponseEntity.noContent().build();

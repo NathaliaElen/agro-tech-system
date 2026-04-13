@@ -38,7 +38,7 @@ public class AlertaController {
     }		
     
     @DeleteMapping("/{id}")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
         deletarAlertaUseCase.deletar(id);
         return ResponseEntity.noContent().build();

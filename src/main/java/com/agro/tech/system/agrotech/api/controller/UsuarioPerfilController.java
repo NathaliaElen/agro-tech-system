@@ -32,7 +32,7 @@ public class UsuarioPerfilController {
     private final DeletarUsuarioPerfilPorUsuarioId deletarUsuarioPerfilPorUsuarioId;
 
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioPerfilCreateRequestDTO requestDTO) {
 
         cadastrarUsuarioPerfilUseCase.executar(requestDTO);
@@ -40,7 +40,7 @@ public class UsuarioPerfilController {
     }
 
     @GetMapping
-    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<UsuarioPerfilResponseDTO>> listarTodos() {
 
         var usuarioPerfilResponse =  listarTodosUsuariosPerfilUseCase.executar();

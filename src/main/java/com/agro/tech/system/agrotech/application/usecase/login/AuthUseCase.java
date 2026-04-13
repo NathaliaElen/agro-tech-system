@@ -53,7 +53,7 @@ public class AuthUseCase {
                         .filter(p -> p.getId().equals(up.getPerfilId()))
                         .findFirst()
                         .map(Perfil::getNome))
-                .orElse("");
+                .orElse("ADMIN");
 
         var usuarioEntity = UsuarioMapper.toEntity(usuario);
 

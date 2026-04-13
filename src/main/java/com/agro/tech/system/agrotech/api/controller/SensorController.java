@@ -31,14 +31,14 @@ public class SensorController {
   private final ListarSensorUseCase listarSensorUseCase;
 
   @PostMapping
-  //@PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> salvar(@RequestBody @Valid SensorRequestDTO sensorRequestDTO) {
     manterSensorUseCase.salvarSensor(sensorRequestDTO);
     return ResponseEntity.status(201).build();
   }
 
   @DeleteMapping("/{id}")
-  //@PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deletar(@PathVariable String id) {
     deletarSensorUseCase.deletarSensor(id);
     return ResponseEntity.noContent().build();

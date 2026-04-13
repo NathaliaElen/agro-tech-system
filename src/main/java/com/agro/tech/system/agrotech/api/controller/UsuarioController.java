@@ -38,7 +38,7 @@ public class UsuarioController {
     private final DeletarUsuarioUseCase deletarUsuarioUseCase;
 
     @PostMapping
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid UsuarioRequestDTO usuarioDto) {
 
         cadatrarUsuarioUseCase.executar(usuarioDto);
