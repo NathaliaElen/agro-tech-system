@@ -1,5 +1,7 @@
 package com.agro.tech.system.agrotech.application.usecase.regra;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +22,8 @@ public class ManterRegraUseCase {
 	public Regra salvarRegra(RegraRequestDTO regraRequestDTO) {
 		
 		String id = (regraRequestDTO.id() == null || regraRequestDTO.id().isBlank()) ? null : regraRequestDTO.id();
-
+		LocalDateTime atualizadoEm  = (regraRequestDTO.atualizadoEm() == null ) ? LocalDateTime.now() : regraRequestDTO.atualizadoEm();
+		LocalDateTime criadoEm  = (regraRequestDTO.criadoEm() == null ) ? LocalDateTime.now() : regraRequestDTO.criadoEm();
 		Regra regra = new Regra(
 				id,
 				regraRequestDTO.nome(),
@@ -32,8 +35,8 @@ public class ManterRegraUseCase {
 				regraRequestDTO.areaId(),
 				regraRequestDTO.sensorId(),
 				Status.fromDescricao(regraRequestDTO.status()),
-				regraRequestDTO.criadoEm(),
-				regraRequestDTO.atualizadoEm()
+				criadoEm,
+				atualizadoEm
 				);
 		
 		return regraRepository.salvar(regra);
