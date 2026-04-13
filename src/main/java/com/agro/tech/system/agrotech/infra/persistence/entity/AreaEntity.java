@@ -53,7 +53,7 @@ public class AreaEntity {
     @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
-    @Column(name = "atualizado_em")
+    @Column(name = "atualizado_em",nullable = true)
     private LocalDateTime atualizadoEm;
 
     @PrePersist
