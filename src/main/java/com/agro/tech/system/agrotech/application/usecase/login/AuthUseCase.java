@@ -64,7 +64,10 @@ public class AuthUseCase {
         var token = tokenService.gerarToken(loginEntity);
 
         return new LoginResponseDTO(
-            token
+            token,
+            "Bearer",
+            loginRequestDto.email(),
+            usuarioEntity.getNome()            
         );
     }
 }

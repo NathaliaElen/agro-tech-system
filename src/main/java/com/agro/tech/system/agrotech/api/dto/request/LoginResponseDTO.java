@@ -6,5 +6,8 @@ import com.agro.tech.system.agrotech.domain.model.UsuarioPerfil;
 import java.util.List;
 
 public record LoginResponseDTO(
-        String token
+        String token,
+        String tipo,
+        String email,
+        String nome        
 ) {}
